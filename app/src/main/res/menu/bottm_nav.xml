@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title=""
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/home"
+        />
+    <item android:title=""
+        android:id="@+id/playSquahFragment"
+        android:icon="@drawable/ic_ellipse_1"/>
+    <item android:title=""
+        android:id="@+id/menuFragment"
+        android:icon="@drawable/ic___horizontal_dots_icon" />
+</menu>
