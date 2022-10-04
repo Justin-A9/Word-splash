@@ -4,41 +4,40 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hiiii.data.DataSource
 import com.example.hiiii.databinding.ActivitySubCategoryBinding
-import com.example.hiiii.fragments.subCategoryAdapter
-import com.example.hiiii.fragments.sub_users
+import com.example.hiiii.Adapters.SubCategoryAdapter
+import com.example.hiiii.data.Sub_users
 import java.util.*
 import kotlin.collections.ArrayList
 
 class SUB_CATEGORY : AppCompatActivity() {
 
-    val sub_professions = ArrayList<sub_users>()
+    val sub_professions = ArrayList<Sub_users>()
+    val medicineOccupation = DataSource().loadMedicineOccupation()
 
-    val  displayList = ArrayList<sub_users>()
+
+    val  displayList = ArrayList<Sub_users>()
     private lateinit var binding: ActivitySubCategoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySubCategoryBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
         val recycler = binding.subRecycler
         recycler.layoutManager = LinearLayoutManager(this)
 
 
+        val intent = intent.extras
+        val getData =intent?.get("name")
+        binding.text.text = getData.toString()
 
+        val adapter = SubCategoryAdapter(medicineOccupation)
 
-        sub_professions.add(sub_users("Victor"))
-        sub_professions.add(sub_users("Joshua"))
-        sub_professions.add(sub_users("Great"))
-        sub_professions.add(sub_users("Victor"))
-        val adapter = subCategoryAdapter(displayList)
-
-        displayList.addAll(sub_professions)
+        medicineOccupation.addAll(sub_professions)
         recycler.adapter = adapter
 
 
@@ -61,20 +60,20 @@ class SUB_CATEGORY : AppCompatActivity() {
 
                     if (newText!!.isNotEmpty()){
 
-                        displayList.clear()
+                        medicineOccupation.clear()
                         val search = newText.toLowerCase(Locale.getDefault())
                         sub_professions.forEach {
 
                             if (it.name.toLowerCase(Locale.getDefault()).contains(search)){
-                                displayList.add(it)
+                                medicineOccupation.add(it)
                             }
 
                         }
                         binding.subRecycler.adapter!!.notifyDataSetChanged()
 
                     }else{
-                        displayList.clear()
-                        displayList.addAll(sub_professions)
+                        medicineOccupation.clear()
+                        medicineOccupation.addAll(sub_professions)
                         binding.subRecycler.adapter!!.notifyDataSetChanged()
                     }
                     return true

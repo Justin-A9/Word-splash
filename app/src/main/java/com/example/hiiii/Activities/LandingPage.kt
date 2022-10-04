@@ -1,19 +1,16 @@
-package com.example.hiiii
+package com.example.hiiii.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import com.example.hiiii.R
 import com.example.hiiii.databinding.ActivityLandingPageBinding
 import com.example.hiiii.fragments.homeFragment
 import com.example.hiiii.fragments.menuFragment
 import com.example.hiiii.fragments.playSquahFragment
 
-class landingPage : AppCompatActivity() {
+class LandingPage : AppCompatActivity() {
 
     private lateinit var binding: ActivityLandingPageBinding
 

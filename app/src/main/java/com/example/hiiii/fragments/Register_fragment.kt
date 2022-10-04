@@ -1,7 +1,6 @@
-package com.example.hiiii
+package com.example.hiiii.Activities
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,12 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
+import com.example.hiiii.R
 import com.example.hiiii.databinding.FragmentRegisterFragmentBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class register_fragment : Fragment() {
+class Register_fragment : Fragment() {
 
     private var _binding : FragmentRegisterFragmentBinding? = null
     private val binding get() = _binding!!

@@ -11,8 +11,13 @@ import com.example.hiiii.SUB_CATEGORY
 
 class Adapter(private val userOccupations: ArrayList<Occupations>):
     RecyclerView.Adapter<Adapter.ViewHolder>()  {
+
+    var onItemClick : ((Occupations) -> Unit)? = null
+
+
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var mainOccupation = itemView.findViewById<TextView>(R.id.profession)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.ViewHolder {
@@ -26,7 +31,7 @@ class Adapter(private val userOccupations: ArrayList<Occupations>):
 
         holder.itemView.setOnClickListener {
 
-            holder.itemView.context.startActivity(Intent(holder.itemView.context, SUB_CATEGORY::class.java))
+            onItemClick?.invoke(listOccupations)
         }
     }
 

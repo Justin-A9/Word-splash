@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.example.hiiii.databinding.FragmentLoginPageFragmentBinding
-import com.example.hiiii.databinding.FragmentRegisterFragmentBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -18,7 +17,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class login_page_fragment : Fragment() {
+class Login_page_fragment : Fragment() {
 
     private var _binding : FragmentLoginPageFragmentBinding? = null
     private val binding get() = _binding!!
@@ -57,7 +56,7 @@ class login_page_fragment : Fragment() {
 
         binding.tvForgotPassword.setOnClickListener {
 
-            Navigation.findNavController(view).navigate(R.id.action_login_page_fragment_to_forgot_password_fragment)
+            Navigation.findNavController(view).navigate(R.id.action_login_page_fragment_to_forgot_password_fragment3)
         }
 
         binding.signInWithGoogle.setOnClickListener{
