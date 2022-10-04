@@ -1,4 +1,4 @@
-package com.example.hiiii
+package com.example.hiiii.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.hiiii.Activity.LandingPage
-import com.example.hiiii.Activity.AuthScreens
+import com.example.hiiii.Activities.LandingPage
+import com.example.hiiii.R
 import com.example.hiiii.databinding.FragmentOnBoardingScreenBinding
 
 
@@ -18,6 +20,7 @@ class OnBoardingScreen : Fragment(), ViewPager.OnPageChangeListener {
     private var _binding : FragmentOnBoardingScreenBinding? = null
     private val binding get() = _binding!!
     private lateinit var layoutRes: List<Int>
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +31,7 @@ class OnBoardingScreen : Fragment(), ViewPager.OnPageChangeListener {
         _binding = FragmentOnBoardingScreenBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        navController = NavHostFragment.findNavController(this)
         setUpViewPager()
 
         binding.next.setOnClickListener {
@@ -36,18 +40,15 @@ class OnBoardingScreen : Fragment(), ViewPager.OnPageChangeListener {
 
         binding.getStarted.setOnClickListener {
 
-            val intent = Intent(requireContext(), AuthScreens::class.java)
-            startActivity(intent)
+           navController.navigate(R.id.action_onBoardingScreen_to_authScreens)
+            activity?.finish()
         }
-
-
 
         binding.skip.setOnClickListener {
-
-            startActivity(Intent(requireContext(), LandingPage::class.java))
+            val intent = Intent(requireContext(), LandingPage::class.java)
+            //startActivity(intent)
+            activity?.startActivity(intent)
         }
-
-
         return view
     }
 

@@ -1,60 +1,47 @@
-package com.example.hiiii.menuScreens
+package com.example.hiiii.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.hiiii.R
+import com.example.hiiii.databinding.FragmentDropAFeedBackBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [dropAFeedBack.newInstance] factory method to
- * create an instance of this fragment.
- */
-class dropAFeedBack : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class DropAFeedBack : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentDropAFeedBackBinding
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_drop_a_feed_back, container, false)
+       binding = FragmentDropAFeedBackBinding.inflate(inflater, container, false)
+        navController = NavHostFragment.findNavController(this)
+
+        binding.backBtn.setOnClickListener {
+            navController.navigate(R.id.action_dropAFeedBack_to_menuFragment)
+        }
+
+        binding.submit.setOnClickListener {
+
+            if (binding.dropFeedback.text.toString().isEmpty()){
+                Toast.makeText(requireContext(), "Please enter your text", Toast.LENGTH_SHORT).show()
+            }else if (binding.dropFeedback.text.toString().length < 10){
+                Toast.makeText(requireContext(), "please input a longer text", Toast.LENGTH_SHORT).show()
+            }else{
+                navController.navigate(R.id.action_dropAFeedBack_to_menuFragment)
+                Toast.makeText(requireContext(), "Thank you, We have received your feedback", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment dropAFeedBack.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            dropAFeedBack().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

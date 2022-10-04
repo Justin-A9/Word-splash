@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".menuScreens.dropAFeedBack">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".fragments.DropAFeedBack">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/back"
+                android:padding="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/dropFeedbacktxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drop a feedback"
+                android:fontFamily="@font/poppins"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="80dp"
+                android:layout_marginStart="47dp"
+                android:textStyle="bold"
+                android:textColor="@color/fade_black" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout4"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="30dp"
+                android:hint=""
+                app:hintAnimationEnabled="true"
+                app:layout_constraintTop_toBottomOf="@id/dropFeedbacktxt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/drop_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="start"
+                    android:hint="Drop your feedback"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false"
+                    android:textColor="#B3000000"
+                    android:textColorHint="@color/main_primary_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="submit"
+                android:textColor="@color/white"
+                android:layout_margin="40dp"
+                android:background="@drawable/hey"
+                app:layout_constraintTop_toBottomOf="@id/layout4"
+                android:layout_marginTop="40dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

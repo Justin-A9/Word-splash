@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="260dp"
+        android:background="@drawable/custom_dialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="310dp">
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/fade_black"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/image"
+            android:layout_height="wrap_content"
+            android:text="The process of removing something from something"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:textColor="@color/white"
+            android:text="Close"
+            android:background="@drawable/hey"
+            android:layout_below="@id/text1"/>
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:padding="9dp"
+            android:layout_marginTop="60dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/wordsplashlogo"
+            android:background="@drawable/circle_border"/>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

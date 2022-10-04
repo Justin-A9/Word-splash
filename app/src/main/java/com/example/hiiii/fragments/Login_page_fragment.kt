@@ -1,4 +1,4 @@
-package com.example.hiiii
+package com.example.hiiii.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.example.hiiii.R
 import com.example.hiiii.databinding.FragmentLoginPageFragmentBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount

@@ -6,16 +6,25 @@
     app:startDestination="@id/splashScreenFragment">
     <fragment
         android:id="@+id/onBoardingScreen"
-        android:name="com.example.hiiii.OnBoardingScreen"
+        android:name="com.example.hiiii.fragments.OnBoardingScreen"
         android:label="fragment_on_boarding_screen"
-        tools:layout="@layout/fragment_on_boarding_screen" />
+        tools:layout="@layout/fragment_on_boarding_screen" >
+        <action
+            android:id="@+id/action_onBoardingScreen_to_authScreens"
+            app:destination="@id/authScreens" />
+    </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.example.hiiii.SplashScreenFragment"
+        android:name="com.example.hiiii.fragments.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreenFragment_to_onBoardingScreen"
             app:destination="@id/onBoardingScreen" />
     </fragment>
+    <activity
+        android:id="@+id/authScreens"
+        android:name="com.example.hiiii.Activities.AuthScreens"
+        android:label="activity_auth_screens"
+        tools:layout="@layout/activity_auth_screens" />
 </navigation>

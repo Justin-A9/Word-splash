@@ -1,13 +1,12 @@
-package com.example.hiiii.fragments
+package com.example.hiiii.Adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hiiii.R
-import com.example.hiiii.SUB_CATEGORY
+import com.example.hiiii.data.Occupations
 
 class Adapter(private val userOccupations: ArrayList<Occupations>):
     RecyclerView.Adapter<Adapter.ViewHolder>()  {
@@ -20,12 +19,12 @@ class Adapter(private val userOccupations: ArrayList<Occupations>):
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_layout, parent, false)
         return  ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var listOccupations: Occupations = userOccupations[position]
         holder.mainOccupation.text = listOccupations.name
 

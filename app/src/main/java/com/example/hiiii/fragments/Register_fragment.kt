@@ -1,4 +1,4 @@
-package com.example.hiiii.Activities
+package com.example.hiiii.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -10,8 +10,11 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.hiiii.R
 import com.example.hiiii.databinding.FragmentRegisterFragmentBinding
+import com.example.hiiii.datasource.FireStoreData
+import com.example.hiiii.datasource.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 
 class Register_fragment : Fragment() {
@@ -70,9 +73,18 @@ class Register_fragment : Fragment() {
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
                         val user = Firebase.auth.currentUser
+                        val myUser = Users(
+                            binding.registerEmail.text.toString().trim { it <= ' ' },
+                            binding.registerPassword.text.toString().trim { it <= ' ' },
+                            binding.registerConfirmPassword.text.toString().trim { it <= ' ' }
+                        )
+
                         Toast("You have successfully created a account")
                         binding.progressBar.visibility = View.GONE
                         successAlertDialog()
+                        if (myUser != null) {
+                            FireStoreData().registerUser(this, myUser)
+                        }
 
                     } else {
 

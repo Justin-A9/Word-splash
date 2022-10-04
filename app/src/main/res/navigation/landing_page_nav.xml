@@ -9,14 +9,6 @@
         android:id="@+id/homeFragment2"
         android:name="com.example.hiiii.fragments.homeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment2_to_sub_categories"
-            app:destination="@id/sub_categories" />
-    </fragment>
-    <fragment
-        android:id="@+id/sub_categories"
-        android:name="com.example.hiiii.sub_categories"
-        android:label="fragment_sub_categories"
-        tools:layout="@layout/fragment_sub_categories" />
+        tools:layout="@layout/fragment_home" />
+
 </navigation>

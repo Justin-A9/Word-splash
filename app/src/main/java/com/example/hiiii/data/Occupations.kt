@@ -1,4 +1,4 @@
-package com.example.hiiii.fragments
+package com.example.hiiii.data
 
 data class Occupations(
     val name: String = ""

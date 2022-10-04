@@ -1,14 +1,16 @@
-package com.example.hiiii.Activity
+package com.example.hiiii.Activities
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.hiiii.R
 import com.example.hiiii.databinding.ActivityLandingPageBinding
-import com.example.hiiii.fragments.homeFragment
-import com.example.hiiii.fragments.menuFragment
-import com.example.hiiii.fragments.playSquahFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class LandingPage : AppCompatActivity() {
 
@@ -19,38 +21,24 @@ class LandingPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLandingPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        changeFragment(homeFragment())
 
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
         //actionBar?.hide()
         supportActionBar?.hide()
+        val navController: NavController = Navigation.findNavController(this, R.id.navHost)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        setupWithNavController(bottomNavigationView, navController)
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.homeFragment || destination.id == R.id.playSquashFragment || destination.id == R.id.menuFragment) {
 
+                bottomNavigationView.visibility = View.VISIBLE
+            } else {
 
-
-       binding.bottomNav.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.homeFragment -> changeFragment(homeFragment())
-                R.id.playSquahFragment -> changeFragment(playSquahFragment())
-                R.id.menuFragment -> changeFragment(menuFragment())
-                else->{
-
-                }
+                bottomNavigationView.visibility = View.GONE
             }
-         true
         }
+
     }
-
-
-    fun changeFragment(fragment: Fragment){
-
-        supportFragmentManager.beginTransaction().apply {
-
-            replace(R.id.frameLayout, fragment)
-            commit()
-        }
-    }
-
 
 }

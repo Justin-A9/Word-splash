@@ -26,6 +26,9 @@ class playSquahFragment : Fragment() {
         val timer = resources.getStringArray(R.array.timer)
         val timerAdapter = ArrayAdapter(requireContext(), R.layout.drop_down, timer)
         binding.autoCompleteTextView2.setAdapter(timerAdapter)
+
+        val languages = resources.getStringArray(R.array.languages)
+        val languageAdapter = ArrayAdapter(requireContext(),R.layout.drop_down, languages)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

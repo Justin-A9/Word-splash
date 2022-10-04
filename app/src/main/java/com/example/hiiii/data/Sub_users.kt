@@ -1,5 +1,5 @@
-package com.example.hiiii.fragments
+package com.example.hiiii.data
 
-data class sub_users(
-    val name: String = ""
+data class Sub_users(
+    val name: String
 )

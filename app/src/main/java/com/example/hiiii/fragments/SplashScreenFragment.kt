@@ -1,14 +1,13 @@
-package com.example.hiiii
+package com.example.hiiii.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
+import com.example.hiiii.R
 
 class SplashScreenFragment : Fragment() {
 

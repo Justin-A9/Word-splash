@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.subCategory">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        tools:text="Medicine"
+        android:padding="20dp"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/subRecycler"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="match_parent"/>
+
+    <!--    <SearchView-->
+    <!--        android:id="@+id/searchView"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        android:layout_marginTop="30dp"-->
+    <!--        android:background="@drawable/search_view"-->
+    <!--        android:queryHint="Enter a sub-category"-->
+    <!--        android:iconifiedByDefault="false"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"/>-->
+
+
+</LinearLayout>

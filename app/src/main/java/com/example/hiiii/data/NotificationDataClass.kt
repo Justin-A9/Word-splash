@@ -1,3 +1,3 @@
 package com.example.hiiii.data
 
-data class NotificationDataClass()
+data class NotificationDataClass(val message : String)

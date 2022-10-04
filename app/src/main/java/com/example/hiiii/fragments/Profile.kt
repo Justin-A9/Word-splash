@@ -1,33 +1,58 @@
-package com.example.hiiii
+package com.example.hiiii.fragments
 
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
-import androidx.navigation.Navigation
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.example.hiiii.R
+import com.example.hiiii.databinding.FragmentProfileBinding
 
 
-class Fragment1 : Fragment() {
+class Profile : Fragment() {
 
-
+    private lateinit var navController: NavController
+    private lateinit var binding: FragmentProfileBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_1, container, false)
+        binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
 
-        val btn = view.findViewById<AppCompatButton>(R.id.editProfileBTN)
-        btn.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_to_fragment2)
+        navController = NavHostFragment.findNavController(this)
+
+        binding.backBtn.setOnClickListener {
+            navController.navigate(R.id.action_profile_to_menuFragment)
+        }
+        binding.editProfileBTN.setOnClickListener {
+            navController.navigate(R.id.action_profile_to_edit_Profile)
+        }
+
+        val args = this.arguments
+        val getData1 = args?.get("email")
+        val getData2 = args?.get("tellUs")
+        val getData3 = args?.get("username")
+        val imagePath= args?.get("image")
+        val image= args?.getInt("image")
+        val bitmap = BitmapFactory.decodeFile(imagePath.toString())
+        binding.imageProfile.setImageBitmap(bitmap)
+        val myUri = Uri.parse(imagePath.toString())
+        binding.imageProfile.setImageURI(myUri)
+        if (image != null) {
+            binding.imageProfile.setImageResource(image)
         }
 
 
+        binding.about.text = getData2.toString()
+        binding.profileEmail.text = getData1.toString()
+        binding.profileName.text = getData3.toString()
 
-        return  view
+
+        return binding.root
     }
 
 
