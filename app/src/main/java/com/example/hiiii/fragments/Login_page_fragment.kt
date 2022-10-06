@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.example.hiiii.Activities.LandingPage
 import com.example.hiiii.R
 import com.example.hiiii.databinding.FragmentLoginPageFragmentBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -103,7 +104,9 @@ class Login_page_fragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                     if (user != null) {
-                        //startActivity(Intent(requireContext(), HomeScreen::class.java))
+
+                        val intent = Intent(requireContext(), LandingPage::class.java)
+                        activity?.startActivity(intent)
                     }
                 } else {
                     android.widget.Toast.makeText(requireContext(), "Operation failed", android.widget.Toast.LENGTH_SHORT).show()
@@ -128,6 +131,8 @@ class Login_page_fragment : Fragment() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
+                    val intent = Intent(requireContext(), LandingPage::class.java)
+                    activity?.startActivity(intent)
                     Toast("You have successfully logged in")
                     binding.progressBar2.visibility = View.GONE
                 } else {

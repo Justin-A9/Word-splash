@@ -167,13 +167,13 @@
 
         <LinearLayout
             android:id="@+id/linear1"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/login_btn"
             app:layout_constraintTop_toBottomOf="@id/login_btn">
 
             <ImageView
@@ -216,7 +216,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign In With Google"
-                android:textColor=" #333333"
+                android:textColor="#333333"
                 android:textSize="16sp"
                 android:textFontWeight="@integer/material_motion_duration_long_1"
                 android:textStyle="bold" />

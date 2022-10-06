@@ -40,10 +40,8 @@ class Profile : Fragment() {
         val getData1 = args?.get("email")
         val getData2 = args?.get("tellUs")
         val getData3 = args?.get("username")
-        val imagePath= args?.get("image")
-        val image= args?.getString("profileImage")
 
-        val currentImage = preferenceManager?.getString("imagesent")
+        val currentImage = args?.getString("profileImage")
 
         if (currentImage != null) {
             val fileUri = Uri.parse(currentImage)
@@ -70,5 +68,8 @@ class Profile : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+    }
 
 }

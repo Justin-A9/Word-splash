@@ -97,6 +97,11 @@ class Register_fragment : Fragment() {
         }
     }
 
+    private fun passInformation(){
+        val bundle = Bundle()
+        bundle.putString("email", binding.registerEmail.text.toString())
+
+    }
     private fun successAlertDialog(){
         val v = View.inflate(requireContext(), R.layout.success_modal_dialog, null)
 
