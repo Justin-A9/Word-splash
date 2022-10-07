@@ -9,13 +9,10 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.hiiii.Adapters.Adapter
-import com.example.hiiii.Activities.SUB_CATEGORY
-import com.example.hiiii.R
+import com.example.hiiii.Activities.SubCategory
 import com.example.hiiii.data.Occupations
 import com.example.hiiii.databinding.FragmentHomeBinding
 import java.util.Timer
-import java.util.TimerTask
-import kotlin.concurrent.timerTask
 
 
 class homeFragment : Fragment() {
@@ -53,7 +50,7 @@ class homeFragment : Fragment() {
 
         adapter.onItemClick = {
             val bundle = Bundle()
-            val intent = Intent(requireContext(), SUB_CATEGORY::class.java)
+            val intent = Intent(requireContext(), SubCategory::class.java)
             intent.putExtra("name", it.name)
             startActivity(intent)
 //            bundle.putString("name", it.name)

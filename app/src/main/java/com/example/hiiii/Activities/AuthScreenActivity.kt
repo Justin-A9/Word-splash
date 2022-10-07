@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.hiiii.R
 
-class AuthScreens : AppCompatActivity() {
+class AuthScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth_screens)

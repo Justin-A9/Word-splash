@@ -16,13 +16,13 @@
             android:name=".Activities.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.SUB_CATEGORY"
+            android:name=".Activities.SubCategory"
             android:exported="false" />
         <activity
             android:name=".Activities.LandingPage"
             android:exported="false" />
         <activity
-            android:name=".Activities.AuthScreens"
+            android:name=".Activities.AuthScreenActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"

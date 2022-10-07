@@ -14,7 +14,7 @@ import com.example.hiiii.data.Sub_users
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SUB_CATEGORY : AppCompatActivity() {
+class SubCategory : AppCompatActivity() {
 
     val sub_professions = ArrayList<Sub_users>()
     val medicineOccupation = ArrayList<Sub_users>()
