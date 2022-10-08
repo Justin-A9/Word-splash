@@ -24,9 +24,8 @@ class Login_page_fragment : Fragment() {
     private var _binding : FragmentLoginPageFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
-    companion object{
-        const val RC_SIGN_IN = 1000
-    }
+    private val RC_SIGN_IN = 1000
+
 
 
     override fun onCreateView(

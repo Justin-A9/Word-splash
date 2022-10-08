@@ -21,10 +21,13 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_onBoardingScreen"
             app:destination="@id/onBoardingScreen" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_authScreens"
+            app:destination="@id/authScreens" />
     </fragment>
     <activity
         android:id="@+id/authScreens"
-        android:name="com.example.hiiii.Activities.AuthScreens"
+        android:name="com.example.hiiii.Activities.AuthScreenActivity"
         android:label="activity_auth_screens"
         tools:layout="@layout/activity_auth_screens" />
 </navigation>

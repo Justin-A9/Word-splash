@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdkPreview kotlin_version
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.hiiii"
@@ -25,22 +25,28 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
+        sourceCompatibility "1.6"
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
     }
 
+    dataBinding{
+        enabled true
+    }
+
     buildFeatures{
         viewBinding true
-        dataBinding true
+
     }
     buildToolsVersion '31.0.0'
     namespace 'com.example.hiiii'
 }
 
 dependencies {
+
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -59,6 +65,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
-    implementation platform('com.google.firebase:firebase-bom:30.2.0')
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation("androidx.room:room-runtime:2.4.3")
+    annotationProcessor("androidx.room:room-compiler:2.4.3")
 }

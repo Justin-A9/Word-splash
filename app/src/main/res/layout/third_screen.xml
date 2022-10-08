@@ -13,14 +13,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline2" />
+        app:layout_constraintBottom_toTopOf="@id/fragmentGuideline3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.80"
+        app:layout_constraintGuide_percent="0.85"
         app:layout_constraintGuide_begin="20dp" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -31,6 +31,12 @@
         app:layout_constraintGuide_percent="0.07"
         app:layout_constraintGuide_begin="20dp" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fragmentGuideline3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="280dp" />
 
 
 
@@ -38,7 +44,7 @@
         android:id="@+id/firstHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:fontFamily="@font/poppins"
         android:text="@string/know_the_word"
         android:textColor="#CC000000"
@@ -47,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+        app:layout_constraintBottom_toTopOf="@id/guideline2" />
 
     <TextView
         android:layout_width="wrap_content"

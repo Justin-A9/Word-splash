@@ -30,21 +30,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/fragmentGuideline"
-        app:layout_constraintTop_toBottomOf="@id/fragmentGuideline2" />
+        app:layout_constraintTop_toBottomOf="@id/fragmentGuideline2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/fragmentGuideline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.78" />
+        app:layout_constraintGuide_end="73dp" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -53,15 +53,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.07" />
+        app:layout_constraintGuide_percent="0.06" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/fragmentGuideline3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.60" />
+        app:layout_constraintGuide_end="280dp" />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/circle_indicator"
@@ -82,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/hey"
         android:textColor="@color/white"
         android:text="next"
@@ -94,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/hey"
         android:text="Get Started"
         android:visibility="gone"

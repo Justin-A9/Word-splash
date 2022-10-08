@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_screens"
-    app:startDestination="@id/register_fragment">
+    app:startDestination="@id/login_page_fragment">
     <fragment
         android:id="@+id/forgot_password_fragment3"
-        android:name="com.example.hiiii.fragments.Forgot_password_fragment"
+        android:name="com.example.hiiii.fragments.ForgotPasswordFragment"
         android:label="Forgot_password_fragment"
         tools:layout="@layout/fragment_forgot_password_fragment"/>
     <fragment

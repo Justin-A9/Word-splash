@@ -12,7 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class Forgot_password_fragment : Fragment() {
+class ForgotPasswordFragment : Fragment() {
 
     private var _binding : FragmentForgotPasswordFragmentBinding? = null
     private val binding get() = _binding!!

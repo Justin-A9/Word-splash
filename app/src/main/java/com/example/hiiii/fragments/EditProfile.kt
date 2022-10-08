@@ -19,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.hiiii.R
 import com.example.hiiii.databinding.FragmentEditProfileBinding
 import com.example.hiiii.datasource.PreferenceManager
+import com.example.hiiii.datasource.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -127,6 +128,9 @@ class EditProfile : Fragment() {
     }
 
 
+    private fun fireStore(){
+
+    }
 
 
 }
