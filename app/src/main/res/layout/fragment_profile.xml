@@ -19,7 +19,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:context=".fragments.Profile">
+                tools:context="com.example.squash.fragments.Profile">
 
                 <ImageView
                     android:id="@+id/back_btn"

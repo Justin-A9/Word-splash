@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.hiiii"
+        applicationId "com.example.squash"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -25,7 +25,7 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility "1.6"
+        sourceCompatibility "1.7"
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
@@ -41,7 +41,7 @@ android {
 
     }
     buildToolsVersion '31.0.0'
-    namespace 'com.example.hiiii'
+    namespace 'com.example.squash'
 }
 
 dependencies {
