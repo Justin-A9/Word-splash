@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_onBoardingScreen"
             app:destination="@id/onBoardingScreen" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_authScreens"
+            app:destination="@id/authScreens" />
     </fragment>
     <activity
         android:id="@+id/authScreens"

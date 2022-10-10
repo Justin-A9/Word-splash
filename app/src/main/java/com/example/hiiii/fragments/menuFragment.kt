@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.hiiii.R
 import com.example.hiiii.databinding.FragmentMenuBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class menuFragment : Fragment() {
 
@@ -17,12 +18,14 @@ class menuFragment : Fragment() {
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
     private lateinit var navController: NavController
+    private lateinit var auth: FirebaseAuth
     override fun onCreateView(
 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
+        auth = FirebaseAuth.getInstance()
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
         navController = NavHostFragment.findNavController(this)
 
@@ -47,6 +50,11 @@ class menuFragment : Fragment() {
 
             navController.navigate(R.id.action_menuFragment_to_dropAFeedBack)
 
+        }
+
+        binding.linearLogin.setOnClickListener {
+            auth.signOut()
+            navController.navigate(R.id.action_menuFragment_to_login_page_fragment2)
         }
         binding.linearShare.setOnClickListener {
 

@@ -1,5 +1,6 @@
 package com.example.hiiii.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.hiiii.Activities.LandingPage
 import com.example.hiiii.R
 import com.example.hiiii.databinding.FragmentOnBoardingScreenBinding
+import com.example.hiiii.datasource.Constants
 
 
 class OnBoardingScreen : Fragment(), ViewPager.OnPageChangeListener {
@@ -41,6 +43,7 @@ class OnBoardingScreen : Fragment(), ViewPager.OnPageChangeListener {
         binding.getStarted.setOnClickListener {
 
            navController.navigate(R.id.action_onBoardingScreen_to_authScreens)
+            onBoardFinished()
             activity?.finish()
         }
 
@@ -48,6 +51,7 @@ class OnBoardingScreen : Fragment(), ViewPager.OnPageChangeListener {
             val intent = Intent(requireContext(), LandingPage::class.java)
             //startActivity(intent)
             activity?.startActivity(intent)
+            onBoardFinished()
         }
         return view
     }
@@ -126,6 +130,13 @@ class OnBoardingScreen : Fragment(), ViewPager.OnPageChangeListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun onBoardFinished(){
+        val sharedprf = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        val editor = sharedprf.edit()
+        editor.putBoolean(Constants.Finished, true)
+        editor.apply()
     }
 
 }

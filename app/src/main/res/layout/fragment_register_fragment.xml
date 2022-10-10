@@ -133,7 +133,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:textColor="#6B000000"
-                android:background="@drawable/edit_text"
                 android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
 

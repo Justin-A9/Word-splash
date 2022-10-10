@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_primary_color">#428DFC</color>
+    <color name="cicrle">#1A428DFC</color>
     <color name="fade_black">#B3000000</color>
 </resources>

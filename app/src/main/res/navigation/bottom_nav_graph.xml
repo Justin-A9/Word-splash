@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_menuFragment_to_privacy_policy"
             app:destination="@id/privacy_policy" />
+        <action
+            android:id="@+id/action_menuFragment_to_login_page_fragment2"
+            app:destination="@id/login_page_fragment2" />
     </fragment>
     <fragment
         android:id="@+id/playSquashFragment"
@@ -79,4 +82,8 @@
             android:id="@+id/action_privacy_policy_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/login_page_fragment2"
+        android:name="com.example.hiiii.fragments.Login_page_fragment"
+        android:label="Login_page_fragment" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.example.hiiii.Activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -26,6 +27,10 @@ class SubCategory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.backBtn.setOnClickListener {
+            //startActivity(Intent(this, LandingPage::class.java))
+            onBackPressed()
+        }
       sub_professions.add(Sub_users("Nursing"))
       sub_professions.add(Sub_users("Nursing"))
       sub_professions.add(Sub_users("Medicine"))

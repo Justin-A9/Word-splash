@@ -3,8 +3,10 @@ package com.example.hiiii.fragments
 import android.R.attr.data
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -16,6 +18,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.hiiii.R
 import com.example.hiiii.databinding.FragmentEditProfileBinding
+import com.example.hiiii.datasource.PreferenceManager
+import com.example.hiiii.datasource.Users
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.IOException
 
@@ -23,9 +30,12 @@ import java.io.IOException
 class EditProfile : Fragment() {
 
     private lateinit var navController: NavController
-    private lateinit var imageUri: Uri
+    private  var imageUri: Uri? = null
+    private lateinit var auth: FirebaseAuth
+
     val requestCode = 0
     private lateinit var binding: FragmentEditProfileBinding
+    var preferenceManager: PreferenceManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +44,24 @@ class EditProfile : Fragment() {
         // Inflate the layout for this fragment
 
         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
+        preferenceManager?.preferenceManager(requireContext())
+        auth = FirebaseAuth.getInstance()
 
         navController = NavHostFragment.findNavController(this)
-        binding.saveChanges.setOnClickListener {
 
+
+        val bundle = Bundle()
+        val my =  binding.username.text.toString()
+        bundle.putString("myName",my)
+
+
+        if (auth.currentUser != null){
+            binding.editProfEmail.setText(auth.currentUser!!.email)
         }
+
+
+
+
 
         binding.backBtn.setOnClickListener {
             navController.navigate(R.id.action_edit_Profile_to_profile)
@@ -48,27 +71,32 @@ class EditProfile : Fragment() {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             startActivityForResult(intent, 0)
-
-            binding.saveChanges.setOnClickListener {
-
-                val bundle = Bundle()
-                val email = binding.editProfEmail.text.toString()
-
-
-                bundle.putString("email", email)
-                bundle.putString("image", binding.imageProfile.toString())
-
-                val username = binding.username.text.toString()
-                bundle.putString("username", username)
-
-
-                val tellUs = binding.tellUs.text.toString()
-                bundle.putString("tellUs", tellUs)
-                navController.navigate(R.id.action_edit_Profile_to_profile, bundle)
-            }
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+        binding.saveChanges.setOnClickListener {
+
+            val bundle = Bundle()
+            val email = binding.editProfEmail.text.toString()
+
+
+            bundle.putString("email", email)
+            bundle.putString("image", binding.imageProfile.toString())
+
+            val username = binding.username.text.toString()
+            bundle.putString("username", username)
+
+            bundle.putString("profileImage", imageUri.toString())
+
+            val tellUs = binding.tellUs.text.toString()
+            bundle.putString("tellUs", tellUs)
+            navController.navigate(R.id.action_edit_Profile_to_profile, bundle)
+        }
     }
 
 
@@ -78,7 +106,8 @@ class EditProfile : Fragment() {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             val imageProfile = view?.findViewById<CircleImageView>(R.id.imageProfile)
 
-            imageUri = data?.data!!
+            imageUri = data.data
+            //preferenceManager?.putString("imagesent", imageUri.toString())
             val bitmap = imageUri?.let { uriToBitMap(it) }
             imageProfile?.setImageBitmap(bitmap)
         }
@@ -96,6 +125,11 @@ class EditProfile : Fragment() {
         }
 
         return null
+    }
+
+
+    private fun fireStore(){
+
     }
 
 
