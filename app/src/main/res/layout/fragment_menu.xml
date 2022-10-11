@@ -62,6 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:fontFamily="@font/montserrat_alternates"
+                        android:layout_gravity="center_vertical"
                         android:text="Profile" />
 
 
@@ -71,11 +72,12 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/next"
+                            android:layout_centerInParent="true"
                             app:tint="#828282" />
 
                     </RelativeLayout>
