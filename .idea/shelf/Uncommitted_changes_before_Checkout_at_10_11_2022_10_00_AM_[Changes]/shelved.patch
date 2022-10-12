@@ -1,0 +1,1213 @@
+Index: app/src/main/res/layout/fragment_play_squah.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_play_squah.xml b/app/src/main/res/layout/fragment_play_squash.xml
+rename from app/src/main/res/layout/fragment_play_squah.xml
+rename to app/src/main/res/layout/fragment_play_squash.xml
+--- a/app/src/main/res/layout/fragment_play_squah.xml	
++++ b/app/src/main/res/layout/fragment_play_squash.xml	
+@@ -13,20 +13,20 @@
+     <androidx.constraintlayout.widget.ConstraintLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+-        tools:context=".fragments.playSquahFragment">
++        tools:context="com.example.squash.fragments.PlaySquashFragment">
+ 
+ 
+         <com.google.android.material.textfield.TextInputLayout
+             android:id="@+id/layout1"
+-            android:layout_marginTop="50dp"
+-            android:layout_marginStart="20dp"
+-            android:layout_marginEnd="20dp"
+             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toBottomOf="@+id/text">
++            android:layout_marginStart="20dp"
++            android:layout_marginTop="310dp"
++            android:layout_marginEnd="20dp"
++            app:layout_constraintTop_toTopOf="parent"
++            tools:layout_editor_absoluteX="1dp"
++            tools:layout_editor_absoluteY="206dp">
+ 
+             <AutoCompleteTextView
+                 android:id="@+id/autoCompleteTextView"
+@@ -35,7 +35,7 @@
+                 android:layout_weight="1"
+                 android:fontFamily="@font/poppins"
+                 android:inputType="none"
+-                android:text="Select your category" />
++                android:text="Choose your category" />
+ 
+ 
+         </com.google.android.material.textfield.TextInputLayout>
+@@ -45,12 +45,12 @@
+             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginTop="20dp"
+             android:layout_marginStart="20dp"
++            android:layout_marginTop="20dp"
+             android:layout_marginEnd="20dp"
+-            app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toBottomOf="@id/layout1">
++            app:layout_constraintTop_toBottomOf="@id/layout1"
++            tools:layout_editor_absoluteX="1dp"
++            tools:layout_editor_absoluteY="206dp">
+ 
+             <AutoCompleteTextView
+                 android:id="@+id/autoCompleteTextView2"
+@@ -64,6 +64,7 @@
+ 
+         </com.google.android.material.textfield.TextInputLayout>
+ 
++
+         <androidx.appcompat.widget.AppCompatButton
+             android:id="@+id/play"
+             android:layout_width="150dp"
+@@ -80,9 +81,7 @@
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/layout2" />
+ 
+-
+         <TextView
+-            android:id="@+id/text"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="20dp"
+@@ -92,11 +91,11 @@
+             android:text="Ready to test your unscrambling skills?"
+             android:textColor="#B3000000"
+             android:textSize="17sp"
+-            android:layout_marginTop="80dp"
++            android:textStyle="bold"
++            app:layout_constraintBottom_toTopOf="@id/layout1"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.5"
+-            app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toTopOf="parent" />
++            app:layout_constraintStart_toStartOf="parent" />
+     </androidx.constraintlayout.widget.ConstraintLayout>
+ </ScrollView>
+ 
+Index: app/src/main/java/com/example/hiiii/data/DataSource.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/data/DataSource.kt b/app/src/main/java/com/example/squash/data/DataSource.kt
+rename from app/src/main/java/com/example/hiiii/data/DataSource.kt
+rename to app/src/main/java/com/example/squash/data/DataSource.kt
+--- a/app/src/main/java/com/example/hiiii/data/DataSource.kt	
++++ b/app/src/main/java/com/example/squash/data/DataSource.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.data
++package com.example.squash.data
+ 
+ class DataSource {
+ 
+Index: app/src/main/java/com/example/hiiii/Adapters/Adapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/Adapters/Adapter.kt b/app/src/main/java/com/example/squash/adapters/Adapter.kt
+rename from app/src/main/java/com/example/hiiii/Adapters/Adapter.kt
+rename to app/src/main/java/com/example/squash/adapters/Adapter.kt
+--- a/app/src/main/java/com/example/hiiii/Adapters/Adapter.kt	
++++ b/app/src/main/java/com/example/squash/adapters/Adapter.kt	
+@@ -1,12 +1,12 @@
+-package com.example.hiiii.Adapters
++package com.example.squash.adapters
+ 
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
+ import android.widget.TextView
+ import androidx.recyclerview.widget.RecyclerView
+-import com.example.hiiii.R
+-import com.example.hiiii.data.Occupations
++import com.example.squash.R
++import com.example.squash.data.Occupations
+ 
+ class Adapter(private val userOccupations: ArrayList<Occupations>):
+     RecyclerView.Adapter<Adapter.ViewHolder>()  {
+Index: app/src/main/java/com/example/hiiii/data/Occupations.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/data/Occupations.kt b/app/src/main/java/com/example/squash/data/Occupations.kt
+rename from app/src/main/java/com/example/hiiii/data/Occupations.kt
+rename to app/src/main/java/com/example/squash/data/Occupations.kt
+--- a/app/src/main/java/com/example/hiiii/data/Occupations.kt	
++++ b/app/src/main/java/com/example/squash/data/Occupations.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.data
++package com.example.squash.data
+ 
+ data class Occupations(
+     val name: String = ""
+Index: app/src/main/java/com/example/hiiii/data/NotificationDataClass.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/data/NotificationDataClass.kt b/app/src/main/java/com/example/squash/data/NotificationDataClass.kt
+rename from app/src/main/java/com/example/hiiii/data/NotificationDataClass.kt
+rename to app/src/main/java/com/example/squash/data/NotificationDataClass.kt
+--- a/app/src/main/java/com/example/hiiii/data/NotificationDataClass.kt	
++++ b/app/src/main/java/com/example/squash/data/NotificationDataClass.kt	
+@@ -1,3 +1,3 @@
+-package com.example.hiiii.data
++package com.example.squash.data
+ 
+ data class NotificationDataClass(val message : String)
+Index: app/src/main/java/com/example/hiiii/fragments/EditProfile.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/EditProfile.kt b/app/src/main/java/com/example/squash/fragments/EditProfile.kt
+rename from app/src/main/java/com/example/hiiii/fragments/EditProfile.kt
+rename to app/src/main/java/com/example/squash/fragments/EditProfile.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/EditProfile.kt	
++++ b/app/src/main/java/com/example/squash/fragments/EditProfile.kt	
+@@ -1,6 +1,5 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+-import android.R.attr.data
+ import android.app.Activity
+ import android.content.Intent
+ import android.graphics.Bitmap
+@@ -14,8 +13,10 @@
+ import androidx.fragment.app.Fragment
+ import androidx.navigation.NavController
+ import androidx.navigation.fragment.NavHostFragment
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.FragmentEditProfileBinding
++import com.example.squash.R
++import com.example.squash.datasource.PreferenceManager
++import com.example.squash.databinding.FragmentEditProfileBinding
++import com.google.firebase.auth.FirebaseAuth
+ import de.hdodenhof.circleimageview.CircleImageView
+ import java.io.IOException
+ 
+@@ -23,9 +24,12 @@
+ class EditProfile : Fragment() {
+ 
+     private lateinit var navController: NavController
+-    private lateinit var imageUri: Uri
++    private  var imageUri: Uri? = null
++    private lateinit var auth: FirebaseAuth
++
+     val requestCode = 0
+     private lateinit var binding: FragmentEditProfileBinding
++    var preferenceManager: PreferenceManager? = null
+ 
+     override fun onCreateView(
+         inflater: LayoutInflater, container: ViewGroup?,
+@@ -34,11 +38,24 @@
+         // Inflate the layout for this fragment
+ 
+         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
++        preferenceManager?.preferenceManager(requireContext())
++        auth = FirebaseAuth.getInstance()
+ 
+         navController = NavHostFragment.findNavController(this)
+-        binding.saveChanges.setOnClickListener {
++
++
++        val bundle = Bundle()
++        val my =  binding.username.text.toString()
++        bundle.putString("myName",my)
++
+ 
++        if (auth.currentUser != null){
++            binding.editProfEmail.setText(auth.currentUser!!.email)
+         }
++
++
++
++
+ 
+         binding.backBtn.setOnClickListener {
+             navController.navigate(R.id.action_edit_Profile_to_profile)
+@@ -48,29 +65,34 @@
+             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+             startActivityForResult(intent, 0)
++        }
++
++        return binding.root
++    }
++
++    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
++
+ 
+-            binding.saveChanges.setOnClickListener {
++        binding.saveChanges.setOnClickListener {
+ 
+-                val bundle = Bundle()
+-                val email = binding.editProfEmail.text.toString()
++            val bundle = Bundle()
++            val email = binding.editProfEmail.text.toString()
+ 
+ 
+-                bundle.putString("email", email)
+-                bundle.putString("image", binding.imageProfile.toString())
++            bundle.putString("email", email)
++            bundle.putString("image", binding.imageProfile.toString())
+ 
+-                val username = binding.username.text.toString()
+-                bundle.putString("username", username)
++            val username = binding.username.text.toString()
++            bundle.putString("username", username)
+ 
++            bundle.putString("profileImage", imageUri.toString())
+ 
+-                val tellUs = binding.tellUs.text.toString()
+-                bundle.putString("tellUs", tellUs)
+-                navController.navigate(R.id.action_edit_Profile_to_profile, bundle)
+-            }
+-        }
++            val tellUs = binding.tellUs.text.toString()
++            bundle.putString("tellUs", tellUs)
++            navController.navigate(R.id.action_edit_Profile_to_profile, bundle)
++        }
++    }
+ 
+-        return binding.root
+-    }
+-
+ 
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         super.onActivityResult(requestCode, resultCode, data)
+@@ -78,7 +100,8 @@
+         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
+             val imageProfile = view?.findViewById<CircleImageView>(R.id.imageProfile)
+ 
+-            imageUri = data?.data!!
++            imageUri = data.data
++            //preferenceManager?.putString("imagesent", imageUri.toString())
+             val bitmap = imageUri?.let { uriToBitMap(it) }
+             imageProfile?.setImageBitmap(bitmap)
+         }
+@@ -99,4 +122,9 @@
+     }
+ 
+ 
++    private fun fireStore(){
++
++    }
++
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/hiiii/fragments/DropAFeedBack.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/DropAFeedBack.kt b/app/src/main/java/com/example/squash/fragments/DropAFeedBack.kt
+rename from app/src/main/java/com/example/hiiii/fragments/DropAFeedBack.kt
+rename to app/src/main/java/com/example/squash/fragments/DropAFeedBack.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/DropAFeedBack.kt	
++++ b/app/src/main/java/com/example/squash/fragments/DropAFeedBack.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.os.Bundle
+ import androidx.fragment.app.Fragment
+@@ -8,8 +8,8 @@
+ import android.widget.Toast
+ import androidx.navigation.NavController
+ import androidx.navigation.fragment.NavHostFragment
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.FragmentDropAFeedBackBinding
++import com.example.squash.R
++import com.example.squash.databinding.FragmentDropAFeedBackBinding
+ 
+ 
+ class DropAFeedBack : Fragment() {
+Index: app/src/main/java/com/example/hiiii/Adapters/SubCategoryAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/Adapters/SubCategoryAdapter.kt b/app/src/main/java/com/example/squash/adapters/SubCategoryAdapter.kt
+rename from app/src/main/java/com/example/hiiii/Adapters/SubCategoryAdapter.kt
+rename to app/src/main/java/com/example/squash/adapters/SubCategoryAdapter.kt
+--- a/app/src/main/java/com/example/hiiii/Adapters/SubCategoryAdapter.kt	
++++ b/app/src/main/java/com/example/squash/adapters/SubCategoryAdapter.kt	
+@@ -1,14 +1,14 @@
+-package com.example.hiiii.Adapters
++package com.example.squash.adapters
+ 
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
+ import android.widget.TextView
+ import androidx.recyclerview.widget.RecyclerView
+-import com.example.hiiii.R
+-import com.example.hiiii.data.Sub_users
++import com.example.squash.R
++import com.example.squash.data.SubUsers
+ 
+-class SubCategoryAdapter(val occupations: ArrayList<Sub_users>): RecyclerView.Adapter<SubCategoryAdapter.ViewHolder>() {
++class SubCategoryAdapter(val occupations: ArrayList<SubUsers>): RecyclerView.Adapter<SubCategoryAdapter.ViewHolder>() {
+     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+ 
+         val sub_category = itemView.findViewById<TextView>(R.id.sub_category_textview)
+@@ -24,7 +24,7 @@
+     }
+ 
+     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+-       val catAdapter : Sub_users = occupations[position]
++       val catAdapter : SubUsers = occupations[position]
+         holder.sub_category.text = catAdapter.name
+     }
+ 
+Index: app/src/main/java/com/example/hiiii/Adapters/NotificationAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/Adapters/NotificationAdapter.kt b/app/src/main/java/com/example/squash/adapters/NotificationAdapter.kt
+rename from app/src/main/java/com/example/hiiii/Adapters/NotificationAdapter.kt
+rename to app/src/main/java/com/example/squash/adapters/NotificationAdapter.kt
+--- a/app/src/main/java/com/example/hiiii/Adapters/NotificationAdapter.kt	
++++ b/app/src/main/java/com/example/squash/adapters/NotificationAdapter.kt	
+@@ -1,12 +1,12 @@
+-package com.example.hiiii.Adapters
++package com.example.squash.adapters
+ 
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
+ import android.widget.TextView
+ import androidx.recyclerview.widget.RecyclerView
+-import com.example.hiiii.R
+-import com.example.hiiii.data.NotificationDataClass
++import com.example.squash.R
++import com.example.squash.data.NotificationDataClass
+ 
+ class NotificationAdapter(private val messageList: ArrayList<NotificationDataClass>) :RecyclerView.Adapter<NotificationAdapter.ViewHolder>(){
+     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+Index: app/src/main/java/com/example/hiiii/fragments/Login_page_fragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/Login_page_fragment.kt b/app/src/main/java/com/example/squash/fragments/LoginPageFragment.kt
+rename from app/src/main/java/com/example/hiiii/fragments/Login_page_fragment.kt
+rename to app/src/main/java/com/example/squash/fragments/LoginPageFragment.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/Login_page_fragment.kt	
++++ b/app/src/main/java/com/example/squash/fragments/LoginPageFragment.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.content.Intent
+ import android.os.Bundle
+@@ -7,8 +7,9 @@
+ import android.view.View
+ import android.view.ViewGroup
+ import androidx.navigation.Navigation
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.FragmentLoginPageFragmentBinding
++import com.example.squash.activities.LandingPage
++import com.example.squash.R
++import com.example.squash.databinding.FragmentLoginPageFragmentBinding
+ import com.google.android.gms.auth.api.signin.GoogleSignIn
+ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+@@ -18,14 +19,13 @@
+ import com.google.firebase.auth.ktx.auth
+ import com.google.firebase.ktx.Firebase
+ 
+-class Login_page_fragment : Fragment() {
++class LoginPageFragment : Fragment() {
+ 
+     private var _binding : FragmentLoginPageFragmentBinding? = null
+     private val binding get() = _binding!!
+     private lateinit var auth: FirebaseAuth
+-    companion object{
+-        const val RC_SIGN_IN = 1000
+-    }
++    private val RC_SIGN_IN = 1000
++
+ 
+ 
+     override fun onCreateView(
+@@ -103,7 +103,9 @@
+                     // Sign in success, update UI with the signed-in user's information
+                     val user = auth.currentUser
+                     if (user != null) {
+-                        //startActivity(Intent(requireContext(), HomeScreen::class.java))
++
++                        val intent = Intent(requireContext(), LandingPage::class.java)
++                        activity?.startActivity(intent)
+                     }
+                 } else {
+                     android.widget.Toast.makeText(requireContext(), "Operation failed", android.widget.Toast.LENGTH_SHORT).show()
+@@ -128,6 +130,8 @@
+         auth.signInWithEmailAndPassword(email, password)
+             .addOnCompleteListener(requireActivity()) { task ->
+                 if (task.isSuccessful) {
++                    val intent = Intent(requireContext(), LandingPage::class.java)
++                    activity?.startActivity(intent)
+                     Toast("You have successfully logged in")
+                     binding.progressBar2.visibility = View.GONE
+                 } else {
+Index: app/src/main/java/com/example/hiiii/fragments/homeFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/homeFragment.kt b/app/src/main/java/com/example/squash/fragments/HomeFragment.kt
+rename from app/src/main/java/com/example/hiiii/fragments/homeFragment.kt
+rename to app/src/main/java/com/example/squash/fragments/HomeFragment.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/homeFragment.kt	
++++ b/app/src/main/java/com/example/squash/fragments/HomeFragment.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.content.Intent
+ import android.os.Bundle
+@@ -8,17 +8,14 @@
+ import android.view.ViewGroup
+ import androidx.navigation.NavController
+ import androidx.recyclerview.widget.GridLayoutManager
+-import com.example.hiiii.Adapters.Adapter
+-import com.example.hiiii.Activities.SUB_CATEGORY
+-import com.example.hiiii.R
+-import com.example.hiiii.data.Occupations
+-import com.example.hiiii.databinding.FragmentHomeBinding
++import com.example.squash.adapters.Adapter
++import com.example.squash.activities.SubCategory
++import com.example.squash.data.Occupations
++import com.example.squash.databinding.FragmentHomeBinding
+ import java.util.Timer
+-import java.util.TimerTask
+-import kotlin.concurrent.timerTask
+ 
+ 
+-class homeFragment : Fragment() {
++class HomeFragment : Fragment() {
+ 
+     private lateinit var timer: Timer
+     private var _binding :FragmentHomeBinding? = null
+@@ -53,7 +50,7 @@
+ 
+         adapter.onItemClick = {
+             val bundle = Bundle()
+-            val intent = Intent(requireContext(), SUB_CATEGORY::class.java)
++            val intent = Intent(requireContext(), SubCategory::class.java)
+             intent.putExtra("name", it.name)
+             startActivity(intent)
+ //            bundle.putString("name", it.name)
+Index: app/src/main/java/com/example/hiiii/fragments/Game.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/Game.kt b/app/src/main/java/com/example/squash/fragments/Game.kt
+rename from app/src/main/java/com/example/hiiii/fragments/Game.kt
+rename to app/src/main/java/com/example/squash/fragments/Game.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/Game.kt	
++++ b/app/src/main/java/com/example/squash/fragments/Game.kt	
+@@ -1,11 +1,11 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.os.Bundle
+ import androidx.fragment.app.Fragment
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
+-import com.example.hiiii.R
++import com.example.squash.R
+ 
+ class Game : Fragment() {
+ 
+Index: app/src/main/java/com/example/hiiii/fragments/Forgot_password_fragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/Forgot_password_fragment.kt b/app/src/main/java/com/example/squash/fragments/ForgotPasswordFragment.kt
+rename from app/src/main/java/com/example/hiiii/fragments/Forgot_password_fragment.kt
+rename to app/src/main/java/com/example/squash/fragments/ForgotPasswordFragment.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/Forgot_password_fragment.kt	
++++ b/app/src/main/java/com/example/squash/fragments/ForgotPasswordFragment.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.os.Bundle
+ import androidx.fragment.app.Fragment
+@@ -6,13 +6,13 @@
+ import android.view.View
+ import android.view.ViewGroup
+ import android.widget.Toast
+-import com.example.hiiii.databinding.FragmentForgotPasswordFragmentBinding
++import com.example.squash.databinding.FragmentForgotPasswordFragmentBinding
+ import com.google.firebase.auth.FirebaseAuth
+ import com.google.firebase.auth.ktx.auth
+ import com.google.firebase.ktx.Firebase
+ 
+ 
+-class Forgot_password_fragment : Fragment() {
++class ForgotPasswordFragment : Fragment() {
+ 
+     private var _binding : FragmentForgotPasswordFragmentBinding? = null
+     private val binding get() = _binding!!
+Index: app/src/main/java/com/example/hiiii/fragments/playSquahFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/playSquahFragment.kt b/app/src/main/java/com/example/squash/fragments/PlaySquashFragment.kt
+rename from app/src/main/java/com/example/hiiii/fragments/playSquahFragment.kt
+rename to app/src/main/java/com/example/squash/fragments/PlaySquashFragment.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/playSquahFragment.kt	
++++ b/app/src/main/java/com/example/squash/fragments/PlaySquashFragment.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.os.Bundle
+ import androidx.fragment.app.Fragment
+@@ -6,13 +6,13 @@
+ import android.view.View
+ import android.view.ViewGroup
+ import android.widget.ArrayAdapter
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.FragmentPlaySquahBinding
++import com.example.squash.R
++import com.example.squash.databinding.FragmentPlaySquashBinding
+ 
+ 
+-class playSquahFragment : Fragment() {
++class PlaySquashFragment : Fragment() {
+ 
+-    private var _binding : FragmentPlaySquahBinding? = null
++    private var _binding : FragmentPlaySquashBinding? = null
+     private  val binding get() = _binding!!
+ 
+     override fun onResume() {
+@@ -36,7 +36,7 @@
+     ): View? {
+         // Inflate the layout for this fragment
+ 
+-        _binding = FragmentPlaySquahBinding.inflate(inflater, container, false)
++        _binding = FragmentPlaySquashBinding.inflate(inflater, container, false)
+ 
+ 
+ 
+Index: app/src/main/java/com/example/hiiii/fragments/OnBoardingScreen.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/OnBoardingScreen.kt b/app/src/main/java/com/example/squash/fragments/OnBoardingScreen.kt
+rename from app/src/main/java/com/example/hiiii/fragments/OnBoardingScreen.kt
+rename to app/src/main/java/com/example/squash/fragments/OnBoardingScreen.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/OnBoardingScreen.kt	
++++ b/app/src/main/java/com/example/squash/fragments/OnBoardingScreen.kt	
+@@ -1,5 +1,6 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
++import android.content.Context
+ import android.content.Intent
+ import android.os.Bundle
+ import androidx.fragment.app.Fragment
+@@ -10,9 +11,10 @@
+ import androidx.navigation.fragment.NavHostFragment
+ import androidx.viewpager.widget.PagerAdapter
+ import androidx.viewpager.widget.ViewPager
+-import com.example.hiiii.Activities.LandingPage
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.FragmentOnBoardingScreenBinding
++import com.example.squash.activities.LandingPage
++import com.example.squash.R
++import com.example.squash.datasource.Constants
++import com.example.squash.databinding.FragmentOnBoardingScreenBinding
+ 
+ 
+ class OnBoardingScreen : Fragment(), ViewPager.OnPageChangeListener {
+@@ -41,6 +43,7 @@
+         binding.getStarted.setOnClickListener {
+ 
+            navController.navigate(R.id.action_onBoardingScreen_to_authScreens)
++            onBoardFinished()
+             activity?.finish()
+         }
+ 
+@@ -48,6 +51,7 @@
+             val intent = Intent(requireContext(), LandingPage::class.java)
+             //startActivity(intent)
+             activity?.startActivity(intent)
++            onBoardFinished()
+         }
+         return view
+     }
+@@ -128,4 +132,11 @@
+         _binding = null
+     }
+ 
++    private fun onBoardFinished(){
++        val sharedprf = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
++        val editor = sharedprf.edit()
++        editor.putBoolean(Constants.Finished, true)
++        editor.apply()
++    }
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/hiiii/fragments/notifications.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/notifications.kt b/app/src/main/java/com/example/squash/fragments/Notifications.kt
+rename from app/src/main/java/com/example/hiiii/fragments/notifications.kt
+rename to app/src/main/java/com/example/squash/fragments/Notifications.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/notifications.kt	
++++ b/app/src/main/java/com/example/squash/fragments/Notifications.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.os.Bundle
+ import androidx.fragment.app.Fragment
+@@ -8,13 +8,13 @@
+ import androidx.navigation.NavController
+ import androidx.navigation.fragment.NavHostFragment
+ import androidx.recyclerview.widget.LinearLayoutManager
+-import com.example.hiiii.Adapters.NotificationAdapter
+-import com.example.hiiii.R
+-import com.example.hiiii.data.NotificationDataClass
+-import com.example.hiiii.databinding.FragmentNotificationsBinding
++import com.example.squash.adapters.NotificationAdapter
++import com.example.squash.R
++import com.example.squash.data.NotificationDataClass
++import com.example.squash.databinding.FragmentNotificationsBinding
+ 
+ 
+-class notifications : Fragment() {
++class Notifications : Fragment() {
+ 
+     private lateinit var binding:FragmentNotificationsBinding
+     private lateinit var navController: NavController
+Index: app/src/main/java/com/example/hiiii/fragments/menuFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/menuFragment.kt b/app/src/main/java/com/example/squash/fragments/MenuFragment.kt
+rename from app/src/main/java/com/example/hiiii/fragments/menuFragment.kt
+rename to app/src/main/java/com/example/squash/fragments/MenuFragment.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/menuFragment.kt	
++++ b/app/src/main/java/com/example/squash/fragments/MenuFragment.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.content.Intent
+ import android.os.Bundle
+@@ -8,21 +8,24 @@
+ import androidx.fragment.app.Fragment
+ import androidx.navigation.NavController
+ import androidx.navigation.fragment.NavHostFragment
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.FragmentMenuBinding
++import com.example.squash.R
++import com.example.squash.databinding.FragmentMenuBinding
++import com.google.firebase.auth.FirebaseAuth
+ 
+-class menuFragment : Fragment() {
++class MenuFragment : Fragment() {
+ 
+ 
+     private var _binding: FragmentMenuBinding? = null
+     private val binding get() = _binding!!
+     private lateinit var navController: NavController
++    private lateinit var auth: FirebaseAuth
+     override fun onCreateView(
+ 
+         inflater: LayoutInflater, container: ViewGroup?,
+         savedInstanceState: Bundle?
+     ): View? {
+ 
++        auth = FirebaseAuth.getInstance()
+         _binding = FragmentMenuBinding.inflate(inflater, container, false)
+         navController = NavHostFragment.findNavController(this)
+ 
+@@ -47,6 +50,11 @@
+ 
+             navController.navigate(R.id.action_menuFragment_to_dropAFeedBack)
+ 
++        }
++
++        binding.linearLogin.setOnClickListener {
++            auth.signOut()
++            navController.navigate(R.id.action_menuFragment_to_login_page_fragment2)
+         }
+         binding.linearShare.setOnClickListener {
+ 
+Index: app/src/main/java/com/example/hiiii/fragments/Register_fragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/Register_fragment.kt b/app/src/main/java/com/example/squash/fragments/RegisterFragment.kt
+rename from app/src/main/java/com/example/hiiii/fragments/Register_fragment.kt
+rename to app/src/main/java/com/example/squash/fragments/RegisterFragment.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/Register_fragment.kt	
++++ b/app/src/main/java/com/example/squash/fragments/RegisterFragment.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.app.AlertDialog
+ import android.os.Bundle
+@@ -8,16 +8,15 @@
+ import android.view.ViewGroup
+ import android.widget.Toast
+ import androidx.navigation.Navigation
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.FragmentRegisterFragmentBinding
+-import com.example.hiiii.datasource.FireStoreData
+-import com.example.hiiii.datasource.Users
++import com.example.squash.R
++import com.example.squash.databinding.FragmentRegisterFragmentBinding
++import com.example.squash.datasource.FireStoreData
++import com.example.squash.datasource.Users
+ import com.google.firebase.auth.FirebaseAuth
+ import com.google.firebase.auth.ktx.auth
+-import com.google.firebase.firestore.auth.User
+ import com.google.firebase.ktx.Firebase
+ 
+-class Register_fragment : Fragment() {
++class RegisterFragment : Fragment() {
+ 
+     private var _binding : FragmentRegisterFragmentBinding? = null
+     private val binding get() = _binding!!
+Index: app/src/main/java/com/example/hiiii/fragments/Profile.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/Profile.kt b/app/src/main/java/com/example/squash/fragments/Profile.kt
+rename from app/src/main/java/com/example/hiiii/fragments/Profile.kt
+rename to app/src/main/java/com/example/squash/fragments/Profile.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/Profile.kt	
++++ b/app/src/main/java/com/example/squash/fragments/Profile.kt	
+@@ -1,6 +1,5 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+-import android.graphics.BitmapFactory
+ import android.net.Uri
+ import android.os.Bundle
+ import android.view.LayoutInflater
+@@ -9,19 +8,23 @@
+ import androidx.fragment.app.Fragment
+ import androidx.navigation.NavController
+ import androidx.navigation.fragment.NavHostFragment
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.FragmentProfileBinding
++import com.example.squash.R
++import com.example.squash.databinding.FragmentProfileBinding
++import com.example.squash.datasource.PreferenceManager
+ 
+ 
+ class Profile : Fragment() {
+ 
+     private lateinit var navController: NavController
+     private lateinit var binding: FragmentProfileBinding
++    var preferenceManager: PreferenceManager? = null
++
+     override fun onCreateView(
+         inflater: LayoutInflater, container: ViewGroup?,
+         savedInstanceState: Bundle?
+     ): View? {
+         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
++        preferenceManager?.preferenceManager(requireContext())
+ 
+         navController = NavHostFragment.findNavController(this)
+ 
+@@ -36,9 +39,16 @@
+         val getData1 = args?.get("email")
+         val getData2 = args?.get("tellUs")
+         val getData3 = args?.get("username")
+-        val imagePath= args?.get("image")
+-        val image= args?.getInt("image")
+-        val bitmap = BitmapFactory.decodeFile(imagePath.toString())
++
++        val currentImage = args?.getString("profileImage")
++
++        if (currentImage != null) {
++            val fileUri = Uri.parse(currentImage)
++            binding.imageProfile.setImageURI(fileUri)
++        }
++
++
++        /*val bitmap = BitmapFactory.decodeFile(imagePath.toString())
+         binding.imageProfile.setImageBitmap(bitmap)
+         val myUri = Uri.parse(imagePath.toString())
+         binding.imageProfile.setImageURI(myUri)
+@@ -46,6 +56,8 @@
+             binding.imageProfile.setImageResource(image)
+         }
+ 
++         */
++
+ 
+         binding.about.text = getData2.toString()
+         binding.profileEmail.text = getData1.toString()
+@@ -55,5 +67,8 @@
+         return binding.root
+     }
+ 
++    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
++
++    }
+ 
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/hiiii/fragments/privacy_policy.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/privacy_policy.kt b/app/src/main/java/com/example/squash/fragments/PrivacyPolicy.kt
+rename from app/src/main/java/com/example/hiiii/fragments/privacy_policy.kt
+rename to app/src/main/java/com/example/squash/fragments/PrivacyPolicy.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/privacy_policy.kt	
++++ b/app/src/main/java/com/example/squash/fragments/PrivacyPolicy.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.os.Bundle
+ import androidx.fragment.app.Fragment
+@@ -7,11 +7,12 @@
+ import android.view.ViewGroup
+ import androidx.navigation.NavController
+ import androidx.navigation.fragment.NavHostFragment
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.FragmentPrivacyPolicyBinding
++import com.example.squash.R
++import com.example.squash.databinding.FragmentPrivacyPolicyBinding
++import com.example.squash.datasource.Constants
+ 
+ 
+-class privacy_policy : Fragment() {
++class PrivacyPolicy : Fragment() {
+ 
+ 
+     private lateinit var binding:FragmentPrivacyPolicyBinding
+@@ -24,12 +25,25 @@
+         binding = FragmentPrivacyPolicyBinding.inflate(inflater, container, false)
+         navController = NavHostFragment.findNavController(this)
+ 
++        showPrivacyPolicy()
+         binding.baseline.setOnClickListener {
+             navController.navigate(R.id.action_privacy_policy_to_menuFragment)
+         }
+ 
++
+         return binding.root
+     }
+ 
++    fun showPrivacyPolicy() {
++        binding.webView.settings.loadsImagesAutomatically = true
++        binding.webView.settings.javaScriptEnabled = true
++        binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
++        binding.webView.loadUrl(Constants.PRIVACY_POLICY)
++
++
++    }
++
++
++
+ 
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/hiiii/Activities/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/Activities/MainActivity.kt b/app/src/main/java/com/example/squash/activities/MainActivity.kt
+rename from app/src/main/java/com/example/hiiii/Activities/MainActivity.kt
+rename to app/src/main/java/com/example/squash/activities/MainActivity.kt
+--- a/app/src/main/java/com/example/hiiii/Activities/MainActivity.kt	
++++ b/app/src/main/java/com/example/squash/activities/MainActivity.kt	
+@@ -1,9 +1,9 @@
+-package com.example.hiiii.Activities
++package com.example.squash.activities
+ 
+ import androidx.appcompat.app.AppCompatActivity
+ import android.os.Bundle
+ import android.view.View
+-import com.example.hiiii.R
++import com.example.squash.R
+ 
+ class MainActivity : AppCompatActivity() {
+     override fun onCreate(savedInstanceState: Bundle?) {
+Index: app/src/main/java/com/example/hiiii/Activities/LandingPage.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/Activities/LandingPage.kt b/app/src/main/java/com/example/squash/activities/LandingPage.kt
+rename from app/src/main/java/com/example/hiiii/Activities/LandingPage.kt
+rename to app/src/main/java/com/example/squash/activities/LandingPage.kt
+--- a/app/src/main/java/com/example/hiiii/Activities/LandingPage.kt	
++++ b/app/src/main/java/com/example/squash/activities/LandingPage.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.Activities
++package com.example.squash.activities
+ 
+ 
+ import android.os.Bundle
+@@ -7,8 +7,8 @@
+ import androidx.navigation.NavController
+ import androidx.navigation.Navigation
+ import androidx.navigation.ui.NavigationUI.setupWithNavController
+-import com.example.hiiii.R
+-import com.example.hiiii.databinding.ActivityLandingPageBinding
++import com.example.squash.R
++import com.example.squash.databinding.ActivityLandingPageBinding
+ import com.google.android.material.bottomnavigation.BottomNavigationView
+ 
+ 
+Index: app/src/main/java/com/example/hiiii/Activities/AuthScreens.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/Activities/AuthScreens.kt b/app/src/main/java/com/example/squash/activities/AuthScreenActivity.kt
+rename from app/src/main/java/com/example/hiiii/Activities/AuthScreens.kt
+rename to app/src/main/java/com/example/squash/activities/AuthScreenActivity.kt
+--- a/app/src/main/java/com/example/hiiii/Activities/AuthScreens.kt	
++++ b/app/src/main/java/com/example/squash/activities/AuthScreenActivity.kt	
+@@ -1,16 +1,23 @@
+-package com.example.hiiii.Activities
++package com.example.squash.activities
+ 
+-import androidx.appcompat.app.AppCompatActivity
+ import android.os.Bundle
+-import android.view.View
+-import com.example.hiiii.R
++import androidx.appcompat.app.AppCompatActivity
++import com.example.squash.R
+ 
+-class AuthScreens : AppCompatActivity() {
++class AuthScreenActivity : AppCompatActivity() {
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         setContentView(R.layout.activity_auth_screens)
+ 
+-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+         supportActionBar?.hide()
++
++
+     }
++
++    override fun onBackPressed() {
++        super.onBackPressed()
++        finish()
++    }
++
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/hiiii/fragments/subCategory.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/fragments/subCategory.kt b/app/src/main/java/com/example/squash/fragments/SubCategory.kt
+rename from app/src/main/java/com/example/hiiii/fragments/subCategory.kt
+rename to app/src/main/java/com/example/squash/fragments/SubCategory.kt
+--- a/app/src/main/java/com/example/hiiii/fragments/subCategory.kt	
++++ b/app/src/main/java/com/example/squash/fragments/SubCategory.kt	
+@@ -1,23 +1,22 @@
+-package com.example.hiiii.fragments
++package com.example.squash.fragments
+ 
+ import android.os.Bundle
+ import androidx.fragment.app.Fragment
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
+-import com.example.hiiii.R
+-import com.example.hiiii.data.Sub_users
+-import com.example.hiiii.databinding.FragmentSubCategoryBinding
++import com.example.squash.data.SubUsers
++import com.example.squash.databinding.FragmentSubCategoryBinding
+ 
+ 
+-class subCategory : Fragment() {
++class SubCategory : Fragment() {
+ 
+     private var _binding : FragmentSubCategoryBinding? = null
+     private val binding get() = _binding!!
+-    val sub_professions = ArrayList<Sub_users>()
++    val sub_professions = ArrayList<SubUsers>()
+ 
+ 
+-    val  displayList = ArrayList<Sub_users>()
++    val  displayList = ArrayList<SubUsers>()
+     override fun onCreateView(
+         inflater: LayoutInflater, container: ViewGroup?,
+         savedInstanceState: Bundle?
+Index: app/src/main/java/com/example/hiiii/datasource/FireStoreData.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/datasource/FireStoreData.kt b/app/src/main/java/com/example/squash/datasource/FireStoreData.kt
+rename from app/src/main/java/com/example/hiiii/datasource/FireStoreData.kt
+rename to app/src/main/java/com/example/squash/datasource/FireStoreData.kt
+--- a/app/src/main/java/com/example/hiiii/datasource/FireStoreData.kt	
++++ b/app/src/main/java/com/example/squash/datasource/FireStoreData.kt	
+@@ -1,7 +1,7 @@
+-package com.example.hiiii.datasource
++package com.example.squash.datasource
+ 
+ import android.util.Log
+-import com.example.hiiii.fragments.Register_fragment
++import com.example.squash.fragments.RegisterFragment
+ import com.google.firebase.firestore.FirebaseFirestore
+ import com.google.firebase.firestore.ktx.firestore
+ import com.google.firebase.ktx.Firebase
+@@ -10,7 +10,7 @@
+ 
+     private val mFirestore = FirebaseFirestore.getInstance()
+ 
+-    fun registerUser(fragment: Register_fragment, userinfo: Users) {
++    fun registerUser(fragment: RegisterFragment, userinfo: Users) {
+ 
+         val db = Firebase.firestore
+ 
+Index: app/src/main/java/com/example/hiiii/Activities/SUB_CATEGORY.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/hiiii/Activities/SUB_CATEGORY.kt b/app/src/main/java/com/example/squash/activities/SubCategory.kt
+rename from app/src/main/java/com/example/hiiii/Activities/SUB_CATEGORY.kt
+rename to app/src/main/java/com/example/squash/activities/SubCategory.kt
+--- a/app/src/main/java/com/example/hiiii/Activities/SUB_CATEGORY.kt	
++++ b/app/src/main/java/com/example/squash/activities/SubCategory.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii.Activities
++package com.example.squash.activities
+ 
+ import androidx.appcompat.app.AppCompatActivity
+ import android.os.Bundle
+@@ -6,18 +6,17 @@
+ import android.view.MenuItem
+ import androidx.appcompat.widget.SearchView
+ import androidx.recyclerview.widget.LinearLayoutManager
+-import com.example.hiiii.data.DataSource
+-import com.example.hiiii.databinding.ActivitySubCategoryBinding
+-import com.example.hiiii.Adapters.SubCategoryAdapter
+-import com.example.hiiii.R
+-import com.example.hiiii.data.Sub_users
++import com.example.squash.databinding.ActivitySubCategoryBinding
++import com.example.squash.adapters.SubCategoryAdapter
++import com.example.squash.R
++import com.example.squash.data.SubUsers
+ import java.util.*
+ import kotlin.collections.ArrayList
+ 
+-class SUB_CATEGORY : AppCompatActivity() {
++class SubCategory : AppCompatActivity() {
+ 
+-    val sub_professions = ArrayList<Sub_users>()
+-    val medicineOccupation = ArrayList<Sub_users>()
++    val sub_professions = ArrayList<SubUsers>()
++    val medicineOccupation = ArrayList<SubUsers>()
+ 
+ 
+     private lateinit var binding: ActivitySubCategoryBinding
+@@ -26,12 +25,16 @@
+         super.onCreate(savedInstanceState)
+         setContentView(binding.root)
+ 
+-      sub_professions.add(Sub_users("Nursing"))
+-      sub_professions.add(Sub_users("Nursing"))
+-      sub_professions.add(Sub_users("Medicine"))
+-      sub_professions.add(Sub_users("Shoe"))
+-      sub_professions.add(Sub_users("Nursing"))
+-      sub_professions.add(Sub_users("Nursing"))
++        binding.backBtn.setOnClickListener {
++            //startActivity(Intent(this, LandingPage::class.java))
++            onBackPressed()
++        }
++      sub_professions.add(SubUsers("Nursing"))
++      sub_professions.add(SubUsers("Nursing"))
++      sub_professions.add(SubUsers("Medicine"))
++      sub_professions.add(SubUsers("Shoe"))
++      sub_professions.add(SubUsers("Nursing"))
++      sub_professions.add(SubUsers("Nursing"))
+         val recycler = binding.subRecycler
+         recycler.layoutManager = LinearLayoutManager(this)
+ 
+Index: app/src/test/java/com/example/hiiii/ExampleUnitTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/example/hiiii/ExampleUnitTest.kt b/app/src/test/java/com/example/squash/ExampleUnitTest.kt
+rename from app/src/test/java/com/example/hiiii/ExampleUnitTest.kt
+rename to app/src/test/java/com/example/squash/ExampleUnitTest.kt
+--- a/app/src/test/java/com/example/hiiii/ExampleUnitTest.kt	
++++ b/app/src/test/java/com/example/squash/ExampleUnitTest.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii
++package com.example.squash
+ 
+ import org.junit.Test
+ 
+Index: app/src/androidTest/java/com/example/hiiii/ExampleInstrumentedTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/example/hiiii/ExampleInstrumentedTest.kt b/app/src/androidTest/java/com/example/squash/ExampleInstrumentedTest.kt
+rename from app/src/androidTest/java/com/example/hiiii/ExampleInstrumentedTest.kt
+rename to app/src/androidTest/java/com/example/squash/ExampleInstrumentedTest.kt
+--- a/app/src/androidTest/java/com/example/hiiii/ExampleInstrumentedTest.kt	
++++ b/app/src/androidTest/java/com/example/squash/ExampleInstrumentedTest.kt	
+@@ -1,4 +1,4 @@
+-package com.example.hiiii
++package com.example.squash
+ 
+ import androidx.test.platform.app.InstrumentationRegistry
+ import androidx.test.ext.junit.runners.AndroidJUnit4
+@@ -19,6 +19,6 @@
+     fun useAppContext() {
+         // Context of the app under test.
+         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+-        assertEquals("com.example.hiiii", appContext.packageName)
++        assertEquals("com.example.squash", appContext.packageName)
+     }
+ }
+\ No newline at end of file

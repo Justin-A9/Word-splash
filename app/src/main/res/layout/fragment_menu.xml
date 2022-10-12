@@ -61,6 +61,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
+                        android:textSize="16sp"
+                        android:layout_gravity="center_vertical"
                         android:fontFamily="@font/montserrat_alternates"
                         android:text="Profile" />
 
@@ -74,6 +76,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
+                            android:layout_centerVertical="true"
                             android:scaleType="centerCrop"
                             android:src="@drawable/next"
                             app:tint="#828282" />
@@ -98,9 +101,11 @@
                         android:src="@drawable/notifications" />
 
                     <TextView
+                        android:textSize="16sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
+                        android:layout_gravity="center_vertical"
                         android:fontFamily="@font/montserrat_alternates"
                         android:text="Notifications" />
 
@@ -110,7 +115,8 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
                             android:scaleType="centerCrop"
@@ -139,9 +145,11 @@
                         android:src="@drawable/lock" />
 
                     <TextView
+                        android:textSize="16sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
+                        android:layout_gravity="center_vertical"
                         android:fontFamily="@font/montserrat_alternates"
                         android:text="Privacy Policy" />
 
@@ -151,6 +159,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
@@ -180,6 +189,8 @@
                         android:src="@drawable/ic_baseline_share_24" />
 
                     <TextView
+                        android:textSize="16sp"
+                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -192,6 +203,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
@@ -220,6 +232,8 @@
                         app:tint="#428DFC" />
 
                     <TextView
+                        android:textSize="16sp"
+                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -232,6 +246,7 @@
 
                         <ImageView
                             android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
                             android:scaleType="centerCrop"
@@ -260,6 +275,8 @@
                         app:tint="#428DFC" />
 
                     <TextView
+                        android:textSize="16sp"
+                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -271,6 +288,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
@@ -298,6 +316,8 @@
                         app:tint="#428DFC" />
 
                     <TextView
+                        android:textSize="16sp"
+                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -310,6 +330,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
