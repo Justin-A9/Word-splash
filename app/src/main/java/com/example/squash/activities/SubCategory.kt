@@ -1,23 +1,19 @@
 package com.example.squash.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.squash.databinding.ActivitySubCategoryBinding
 import com.example.squash.adapters.SubCategoryAdapter
-import com.example.squash.R
-import com.example.squash.data.SubUsers
-import java.util.*
+import com.example.squash.databinding.ActivitySubCategoryBinding
+import com.example.squash.datasource.SubCategories
 import kotlin.collections.ArrayList
 
 class SubCategory : AppCompatActivity() {
 
-    val sub_professions = ArrayList<SubUsers>()
-    val medicineOccupation = ArrayList<SubUsers>()
-
+    private lateinit var subCategories: ArrayList<SubCategories>
+    private lateinit var adapter: SubCategoryAdapter
 
     private lateinit var binding: ActivitySubCategoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,77 +21,57 @@ class SubCategory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        subCategories = ArrayList()
+        subCategories.add(SubCategories("Nursing"))
+        subCategories.add(SubCategories("Nursing"))
+        subCategories.add(SubCategories("Medicine"))
+        subCategories.add(SubCategories("Shoe"))
+        subCategories.add(SubCategories("Nursing"))
+        subCategories.add(SubCategories("Nursing"))
+        adapter = SubCategoryAdapter(subCategories)
+
+
+//        binding.toolbar.apply {
+//            setBackgroundColor(resources.getColor(R.color.white))
+//        }
+
         binding.backBtn.setOnClickListener {
-            //startActivity(Intent(this, LandingPage::class.java))
             onBackPressed()
         }
-      sub_professions.add(SubUsers("Nursing"))
-      sub_professions.add(SubUsers("Nursing"))
-      sub_professions.add(SubUsers("Medicine"))
-      sub_professions.add(SubUsers("Shoe"))
-      sub_professions.add(SubUsers("Nursing"))
-      sub_professions.add(SubUsers("Nursing"))
         val recycler = binding.subRecycler
         recycler.layoutManager = LinearLayoutManager(this)
-
-
-        val intent = intent.extras
-        val getData =intent?.get("name")
-        binding.text.text = getData.toString()
-
-        val adapter = SubCategoryAdapter(medicineOccupation)
-
-        medicineOccupation.addAll(sub_professions)
         recycler.adapter = adapter
 
+        val intent = intent.extras
+        val getData = intent?.get("name")
+        binding.text.text = getData.toString()
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+               myFilter(newText)
+                return false
+            }
+        })
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
-        menuInflater.inflate(R.menu.recyclermenu, menu)
-        val menuItem = menu!!.findItem(R.id.search)
-
-        if (menuItem != null){
-            val searchView = menuItem.actionView as SearchView
-
-            searchView.setOnQueryTextListener(object  : SearchView.OnQueryTextListener{
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-
-                    if (newText!!.isNotEmpty()){
-
-                        medicineOccupation.clear()
-                        val search = newText.toLowerCase(Locale.getDefault())
-                        sub_professions.forEach {
-
-                            if (it.name.toLowerCase(Locale.getDefault()).contains(search)){
-                                medicineOccupation.add(it)
-                            }
-
-                        }
-                        binding.subRecycler.adapter!!.notifyDataSetChanged()
-
-                    }else{
-                        medicineOccupation.clear()
-                        medicineOccupation.addAll(sub_professions)
-                        binding.subRecycler.adapter!!.notifyDataSetChanged()
-                    }
-                    return true
-                }
-
-
-            })
+    private fun myFilter(newText: String?) {
+        val filteredList : ArrayList<SubCategories> = ArrayList()
+        for (item in subCategories){
+            if (item.name.toLowerCase().contains(newText!!.toLowerCase())){
+                filteredList.add(item)
+            }
         }
-
-
-        return super.onCreateOptionsMenu(menu)
+        if (filteredList.isEmpty()){
+            Toast.makeText(applicationContext, "Nothing found", Toast.LENGTH_SHORT).show()
+        }else{
+            adapter.listFilter(filteredList)
+        }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-    }
+
 }

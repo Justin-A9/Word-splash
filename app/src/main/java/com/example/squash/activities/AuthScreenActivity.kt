@@ -16,7 +16,7 @@ class AuthScreenActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+        finishAffinity()
     }
 
 

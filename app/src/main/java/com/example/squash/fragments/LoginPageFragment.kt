@@ -21,8 +21,7 @@ import com.google.firebase.ktx.Firebase
 
 class LoginPageFragment : Fragment() {
 
-    private var _binding : FragmentLoginPageFragmentBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding : FragmentLoginPageFragmentBinding
     private lateinit var auth: FirebaseAuth
     private val RC_SIGN_IN = 1000
 
@@ -34,7 +33,7 @@ class LoginPageFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        _binding = FragmentLoginPageFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentLoginPageFragmentBinding.inflate(inflater, container, false)
 
         val view = binding.root
 
@@ -77,7 +76,8 @@ class LoginPageFragment : Fragment() {
 
         binding.loginBtn.setOnClickListener {
             binding.progressBar2.visibility = View.VISIBLE
-            loginUser()
+              loginUser()
+
         }
 
         binding.DontHaveAnAccount.setOnClickListener {

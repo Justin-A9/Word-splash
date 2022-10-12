@@ -18,4 +18,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }
