@@ -19,7 +19,8 @@
             app:destination="@id/register_fragment" />
         <action
             android:id="@+id/action_login_page_fragment_to_forgot_password_fragment3"
-            app:destination="@id/forgot_password_fragment3" />
+            app:destination="@id/forgot_password_fragment3"
+            app:popUpTo="@id/forgot_password_fragment3" />
     </fragment>
     <fragment
         android:id="@+id/register_fragment"
@@ -28,6 +29,7 @@
         tools:layout="@layout/fragment_register_fragment">
         <action
             android:id="@+id/action_register_fragment_to_login_page_fragment"
-            app:destination="@id/login_page_fragment" />
+            app:destination="@id/login_page_fragment"
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>
