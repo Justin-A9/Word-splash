@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".Activities.SUB_CATEGORY">
+        tools:context="com.example.squash.activities.SubCategory">
 
 <!--    <SearchView-->
 <!--        android:id="@+id/searchView"-->
@@ -18,6 +18,13 @@
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"/>-->
 
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:padding="15dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/ic_baseline_arrow_back_ios_24"/>
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"

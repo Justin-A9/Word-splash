@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".fragments.menuFragment">
+            tools:context="com.example.squash.fragments.MenuFragment">
 
             <TextView
                 android:id="@+id/textViewMenu"
@@ -285,6 +285,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/linearLogin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"

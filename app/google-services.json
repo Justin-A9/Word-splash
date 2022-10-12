@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:191749595561:android:e01d9fdc8163beed53a4b8",
         "android_client_info": {
-          "package_name": "com.example.hiiii"
+          "package_name": "com.example.squash"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "191749595561-76fv225ng29iehehc3uqeug9hhu495us.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.hiiii",
+            "package_name": "com.example.squash",
             "certificate_hash": "bc1e64a20fb76656266dca04035159740fae4a22"
           }
         },

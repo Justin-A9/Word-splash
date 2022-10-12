@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.hiiii.fragments.homeFragment"
+        android:name="com.example.squash.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.example.hiiii.fragments.menuFragment"
+        android:name="com.example.squash.fragments.MenuFragment"
         android:label="menuFragment" >
         <action
             android:id="@+id/action_menuFragment_to_profile"
@@ -26,15 +26,18 @@
         <action
             android:id="@+id/action_menuFragment_to_privacy_policy"
             app:destination="@id/privacy_policy" />
+        <action
+            android:id="@+id/action_menuFragment_to_login_page_fragment2"
+            app:destination="@id/login_page_fragment2" />
     </fragment>
     <fragment
         android:id="@+id/playSquashFragment"
-        android:name="com.example.hiiii.fragments.playSquahFragment"
+        android:name="com.example.squash.fragments.PlaySquashFragment"
         android:label="playSquashFragment"
-        tools:layout="@layout/fragment_play_squah"/>
+        tools:layout="@layout/fragment_play_squash"/>
     <fragment
         android:id="@+id/edit_Profile"
-        android:name="com.example.hiiii.fragments.EditProfile"
+        android:name="com.example.squash.fragments.EditProfile"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" >
         <action
@@ -43,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.hiiii.fragments.Profile"
+        android:name="com.example.squash.fragments.Profile"
         android:label="Profile" >
         <action
             android:id="@+id/action_profile_to_edit_Profile"
@@ -54,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/dropAFeedBack"
-        android:name="com.example.hiiii.fragments.DropAFeedBack"
+        android:name="com.example.squash.fragments.DropAFeedBack"
         android:label="fragment_drop_a_feed_back"
         tools:layout="@layout/fragment_drop_a_feed_back" >
         <action
@@ -63,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/notifications"
-        android:name="com.example.hiiii.fragments.notifications"
+        android:name="com.example.squash.fragments.Notifications"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" >
         <action
@@ -72,11 +75,15 @@
     </fragment>
     <fragment
         android:id="@+id/privacy_policy"
-        android:name="com.example.hiiii.fragments.privacy_policy"
+        android:name="com.example.squash.fragments.PrivacyPolicy"
         android:label="privacy_policy"
         tools:layout="@layout/fragment_privacy_policy">
         <action
             android:id="@+id/action_privacy_policy_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/login_page_fragment2"
+        android:name="com.example.squash.fragments.LoginPageFragment"
+        android:label="Login_page_fragment" />
 </navigation>
