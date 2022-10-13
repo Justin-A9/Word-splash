@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.squash.R
+import com.example.squash.activities.AuthScreenActivity
 import com.example.squash.databinding.FragmentMenuBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -37,35 +38,37 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.linearProfile.setOnClickListener {
-            navController.navigate(R.id.action_menuFragment_to_profile)
+            navigateTo(R.id.action_menuFragment_to_profile)
         }
         binding.linearNotifications.setOnClickListener {
-            navController.navigate(R.id.action_menuFragment_to_notifications)
+            navigateTo(R.id.action_menuFragment_to_notifications)
         }
         binding.linearPrivacyPolicy.setOnClickListener {
-            navController.navigate(R.id.action_menuFragment_to_privacy_policy)
+            navigateTo(R.id.action_menuFragment_to_privacy_policy)
         }
 
         binding.linearDropFeedback.setOnClickListener {
 
-            navController.navigate(R.id.action_menuFragment_to_dropAFeedBack)
+            navigateTo(R.id.action_menuFragment_to_dropAFeedBack)
 
         }
 
         binding.linearLogin.setOnClickListener {
             auth.signOut()
-            navController.navigate(R.id.action_menuFragment_to_login_page_fragment2)
+            val intent = Intent(requireContext(), AuthScreenActivity::class.java)
+            activity?.startActivity(intent)
         }
         binding.linearShare.setOnClickListener {
 
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "type/palin"
-            val shareBody = "You are body"
-            val shareSub = "You subject here"
-            intent.putExtra(Intent.EXTRA_SUBJECT, shareBody)
-            intent.putExtra(Intent.EXTRA_TEXT, shareSub)
-            startActivity(Intent.createChooser(intent, "Share your app"))
+            val intent= Intent()
+            intent.action=Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"Hey Check out this Great app:")
+            intent.type="text/plain"
+            startActivity(Intent.createChooser(intent,"Share To:"))
         }
     }
 
+    private fun navigateTo(id:Int){
+        navController.navigate(id)
+    }
 }
