@@ -1,5 +1,6 @@
 package com.example.squash.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.squash.R
@@ -12,6 +13,12 @@ class AuthScreenActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val fragment = supportFragmentManager.findFragmentById(R.id.login_page_fragment)
+        fragment?.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onBackPressed() {

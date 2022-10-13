@@ -7,32 +7,49 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.squash.adapters.Adapter
 import com.example.squash.activities.SubCategory
 import com.example.squash.data.Occupations
 import com.example.squash.databinding.FragmentHomeBinding
+import com.example.squash.datasource.Constants
+import com.example.squash.datasource.FireStoreData
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Timer
 
 
 class HomeFragment : Fragment() {
 
     private lateinit var timer: Timer
-    private var _binding :FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var  binding :FragmentHomeBinding
     private lateinit var navController: NavController
+    private lateinit var auth: FirebaseAuth
+    private lateinit var fStore: FirebaseFirestore
+    private lateinit var userID: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
+        auth = FirebaseAuth.getInstance()
+        fStore = FirebaseFirestore.getInstance()
+        userID = auth.currentUser!!.uid
+
+        val ref = fStore.collection(Constants.users).document(userID)
+        ref.addSnapshotListener { value, error ->
+            binding.welcome.text = value?.getString("username")
+        }
+
+        binding.welcome.text =FireStoreData().getUserName()
 
 
         timer = Timer()
-        //navController = NavHostFragment.findNavController(this)
+        navController = NavHostFragment.findNavController(this)
         var recycler = binding.recycler
         recycler.layoutManager = GridLayoutManager(requireContext(), 2)
 
