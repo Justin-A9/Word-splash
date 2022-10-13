@@ -41,6 +41,7 @@
 
 
         <TextView
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -53,17 +54,30 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/usernameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Username"
+            android:textColor="#4F4F4F"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout1" />
+
+        <TextView
             android:id="@+id/passwrdTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:text="Password"
             android:textColor="#4F4F4F"
+            android:layout_marginTop="10dp"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout1" />
+            app:layout_constraintTop_toBottomOf="@+id/usernametayour" />
 
         <TextView
             android:id="@+id/confirmPasswordTextView"
@@ -91,6 +105,25 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registerEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="#6B000000"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernametayour"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/layout1"
+            app:layout_constraintStart_toStartOf="@+id/layout1"
+            app:layout_constraintTop_toBottomOf="@+id/usernameText">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"

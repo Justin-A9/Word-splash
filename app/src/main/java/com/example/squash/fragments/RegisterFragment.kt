@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.squash.R
@@ -14,13 +15,20 @@ import com.example.squash.datasource.FireStoreData
 import com.example.squash.datasource.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.HashMap
 
 class RegisterFragment : Fragment() {
 
     private var _binding : FragmentRegisterFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
+    private lateinit var fStore: FirebaseFirestore
+    private lateinit var userID : String
+
 
 
     override fun onCreateView(
@@ -34,6 +42,7 @@ class RegisterFragment : Fragment() {
         val view = binding.root
 
         auth = Firebase.auth
+        fStore = FirebaseFirestore.getInstance()
 
         binding.iAlreadyHaveAnAccount.setOnClickListener {
 
@@ -54,9 +63,12 @@ class RegisterFragment : Fragment() {
 
     private fun registerUser(){
 
-        var email = binding.registerEmail.text.toString()
-        var password = binding.registerPassword.text.toString()
-        var confirmPassword = binding.registerConfirmPassword.text.toString()
+        var email = binding.registerEmail.text.toString().trim { it <= ' ' }
+        var password = binding.registerPassword.text.toString().trim { it <= ' ' }
+        var confirmPassword = binding.registerConfirmPassword.text.toString().trim { it <= ' ' }
+        var username = binding.userName.text.toString().trim()
+
+
 
         if (password != confirmPassword) {
             Toast("Password and confirm password Mis-match")
@@ -71,24 +83,26 @@ class RegisterFragment : Fragment() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
-                        val user = Firebase.auth.currentUser
+
+                        Toast("You have successfully created a account")
+                        val user = FirebaseAuth.getInstance().currentUser?.uid
                         val myUser = Users(
                             binding.registerEmail.text.toString().trim { it <= ' ' },
                             binding.registerPassword.text.toString().trim { it <= ' ' },
-                            binding.registerConfirmPassword.text.toString().trim { it <= ' ' }
+                            binding.registerConfirmPassword.text.toString().trim { it <= ' ' },
+                            binding.userName.text.toString().trim()
                         )
-
-                        Toast("You have successfully created a account")
+                        if (user != null) {
+                            fStore.collection("users").document(user).set(myUser)
+                        }
                         binding.progressBar.visibility = View.GONE
                         successAlertDialog()
-                        if (myUser != null) {
-                            FireStoreData().registerUser(this, myUser)
-                        }
+
 
                     } else {
 
                         // If sign in fails, display a message to the user.
-                        Toast("Authentication Failed")
+                        Toast(task.exception?.message.toString())
                         failedAlertDialog()
                         binding.progressBar.visibility = View.GONE
                     }
@@ -101,10 +115,13 @@ class RegisterFragment : Fragment() {
 
         val builder = AlertDialog.Builder(requireContext())
         builder.setView(v)
-
         val dialog = builder.create()
         dialog.show()
-
+        val button = v.findViewById<Button>(R.id.btn_continue)
+        button.setOnClickListener {
+            view?.let { it1 -> Navigation.findNavController(it1).navigate(R.id.action_register_fragment_to_login_page_fragment) }
+            dialog.dismiss()
+        }
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
 
@@ -120,7 +137,10 @@ class RegisterFragment : Fragment() {
 
         val dialog = builder.create()
         dialog.show()
-
+        val button = v.findViewById<Button>(R.id.btn_failed_continue)
+        button.setOnClickListener {
+            view?.let { it1 -> Navigation.findNavController(it1).navigate(R.id.action_register_fragment_to_login_page_fragment) }
+        }
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
 }
