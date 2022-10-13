@@ -7,37 +7,44 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.squash.adapters.Adapter
 import com.example.squash.activities.SubCategory
 import com.example.squash.data.Occupations
 import com.example.squash.databinding.FragmentHomeBinding
+import com.example.squash.datasource.Constants
+import com.example.squash.datasource.FireStoreData
+import com.google.firebase.auth.FirebaseAuth
 import java.util.Timer
 
 
 class HomeFragment : Fragment() {
 
     private lateinit var timer: Timer
-    private var _binding :FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var  binding :FragmentHomeBinding
     private lateinit var navController: NavController
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
+        auth = FirebaseAuth.getInstance()
 
 
         timer = Timer()
-        //navController = NavHostFragment.findNavController(this)
+        navController = NavHostFragment.findNavController(this)
         var recycler = binding.recycler
         recycler.layoutManager = GridLayoutManager(requireContext(), 2)
 
 
-
+        val args = this.arguments
+        val data = auth.currentUser?.displayName
+        binding.welcome.text = "Welcome, $data"
 
         val occupations = ArrayList<Occupations>()
         occupations.add(Occupations("Medicine"))

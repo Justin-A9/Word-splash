@@ -24,22 +24,4 @@ class FireStoreData {
             }
 
     }
-
-
-//        if (userinfo != null) {
-//            mFirestore.collection(Constants.users)
-//
-//                .document(userinfo.id)
-//                .set(userinfo, SetOptions.merge())
-//                .addOnSuccessListener {
-//
-//
-//                }
-//                .addOnFailureListener {
-//
-//                }
-//        }
-//    }
-
-
 }

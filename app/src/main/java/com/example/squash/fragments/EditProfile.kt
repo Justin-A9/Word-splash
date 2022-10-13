@@ -1,6 +1,7 @@
 package com.example.squash.fragments
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.squash.R
 import com.example.squash.datasource.PreferenceManager
 import com.example.squash.databinding.FragmentEditProfileBinding
+import com.example.squash.datasource.Constants
 import com.google.firebase.auth.FirebaseAuth
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.IOException
@@ -26,6 +28,7 @@ class EditProfile : Fragment() {
     private lateinit var navController: NavController
     private  var imageUri: Uri? = null
     private lateinit var auth: FirebaseAuth
+    val sharedPreferences = activity?.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
 
     val requestCode = 0
     private lateinit var binding: FragmentEditProfileBinding
@@ -43,6 +46,13 @@ class EditProfile : Fragment() {
 
         navController = NavHostFragment.findNavController(this)
 
+        val username = sharedPreferences?.getString(Constants.USERNAME, null)
+        val city = sharedPreferences?.getString("city", null)
+        val tellUs = sharedPreferences?.getString("tellUs", null)
+
+        binding.city.setText(city)
+        binding.tellUs.setText(tellUs)
+        binding.username.setText(username)
 
         val bundle = Bundle()
         val my =  binding.username.text.toString()
@@ -53,10 +63,6 @@ class EditProfile : Fragment() {
             binding.editProfEmail.setText(auth.currentUser!!.email)
         }
 
-
-
-
-
         binding.backBtn.setOnClickListener {
             navController.navigate(R.id.action_edit_Profile_to_profile)
         }
@@ -64,7 +70,7 @@ class EditProfile : Fragment() {
         binding.imageProfile.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            startActivityForResult(intent, 0)
+            startActivityForResult(intent, requestCode)
         }
 
         return binding.root
@@ -74,6 +80,15 @@ class EditProfile : Fragment() {
 
 
         binding.saveChanges.setOnClickListener {
+
+            val editor = sharedPreferences?.edit()
+            editor?.apply {
+                putString(Constants.USERNAME, binding.username.text.toString())
+                putString("email", binding.editProfEmail.text.toString())
+                putString("tellUs", binding.tellUs.text.toString())
+                putString("tellUs", binding.city.text.toString())
+                editor.apply()
+            }
 
             val bundle = Bundle()
             val email = binding.editProfEmail.text.toString()

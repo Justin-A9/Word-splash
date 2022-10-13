@@ -58,13 +58,11 @@ class MenuFragment : Fragment() {
         }
         binding.linearShare.setOnClickListener {
 
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "type/palin"
-            val shareBody = "You are body"
-            val shareSub = "You subject here"
-            intent.putExtra(Intent.EXTRA_SUBJECT, shareBody)
-            intent.putExtra(Intent.EXTRA_TEXT, shareSub)
-            startActivity(Intent.createChooser(intent, "Share your app"))
+            val intent= Intent()
+            intent.action=Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"Hey Check out this Great app:")
+            intent.type="text/plain"
+            startActivity(Intent.createChooser(intent,"Share To:"))
         }
     }
 
