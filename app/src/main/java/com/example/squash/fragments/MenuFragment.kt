@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.squash.R
+import com.example.squash.activities.AuthScreenActivity
 import com.example.squash.databinding.FragmentMenuBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -37,24 +38,25 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.linearProfile.setOnClickListener {
-            navController.navigate(R.id.action_menuFragment_to_profile)
+            navigateTo(R.id.action_menuFragment_to_profile)
         }
         binding.linearNotifications.setOnClickListener {
-            navController.navigate(R.id.action_menuFragment_to_notifications)
+            navigateTo(R.id.action_menuFragment_to_notifications)
         }
         binding.linearPrivacyPolicy.setOnClickListener {
-            navController.navigate(R.id.action_menuFragment_to_privacy_policy)
+            navigateTo(R.id.action_menuFragment_to_privacy_policy)
         }
 
         binding.linearDropFeedback.setOnClickListener {
 
-            navController.navigate(R.id.action_menuFragment_to_dropAFeedBack)
+            navigateTo(R.id.action_menuFragment_to_dropAFeedBack)
 
         }
 
         binding.linearLogin.setOnClickListener {
             auth.signOut()
-            navController.navigate(R.id.action_menuFragment_to_login_page_fragment2)
+            val intent = Intent(requireContext(), AuthScreenActivity::class.java)
+            activity?.startActivity(intent)
         }
         binding.linearShare.setOnClickListener {
 
@@ -66,4 +68,7 @@ class MenuFragment : Fragment() {
         }
     }
 
+    private fun navigateTo(id:Int){
+        navController.navigate(id)
+    }
 }

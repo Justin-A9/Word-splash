@@ -16,6 +16,7 @@ import com.example.squash.databinding.FragmentHomeBinding
 import com.example.squash.datasource.Constants
 import com.example.squash.datasource.FireStoreData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Timer
 
 
@@ -25,6 +26,8 @@ class HomeFragment : Fragment() {
     private lateinit var  binding :FragmentHomeBinding
     private lateinit var navController: NavController
     private lateinit var auth: FirebaseAuth
+    private lateinit var fStore: FirebaseFirestore
+    private lateinit var userID: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,15 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         auth = FirebaseAuth.getInstance()
+        fStore = FirebaseFirestore.getInstance()
+        userID = auth.currentUser!!.uid
+
+        val ref = fStore.collection(Constants.users).document(userID)
+        ref.addSnapshotListener { value, error ->
+            binding.welcome.text = value?.getString("username")
+        }
+
+        binding.welcome.text =FireStoreData().getUserName()
 
 
         timer = Timer()
@@ -42,9 +54,7 @@ class HomeFragment : Fragment() {
         recycler.layoutManager = GridLayoutManager(requireContext(), 2)
 
 
-        val args = this.arguments
-        val data = auth.currentUser?.displayName
-        binding.welcome.text = "Welcome, $data"
+
 
         val occupations = ArrayList<Occupations>()
         occupations.add(Occupations("Medicine"))

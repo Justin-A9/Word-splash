@@ -80,7 +80,7 @@ class RegisterFragment : Fragment() {
             binding.progressBar.visibility = View.GONE
         } else if (!isValidPassword(password)) {
             showErrorSnackBar(
-                "Password must contain a letter, a number and a symbol",
+                "Password must contain a capital letter ,a small letter, a number and a symbol",
                 true
             )
         } else if (password.isEmpty()) {
@@ -108,11 +108,13 @@ class RegisterFragment : Fragment() {
 
                         binding.progressBar.visibility = View.GONE
                         successAlertDialog()
-                        FireStoreData().registerUser(this, myUser)
+                        if (myUser != null){
+                            FireStoreData().registerUser(this, myUser)
+                        }
                     } else {
 
                         // If sign in fails, display a message to the user.
-                        showErrorSnackBar("Authentication Failed", true)
+                        showErrorSnackBar(task.exception?.message.toString(), true)
                         failedAlertDialog()
                         binding.progressBar.visibility = View.GONE
                     }
@@ -162,6 +164,7 @@ class RegisterFragment : Fragment() {
 
     private fun successAlertDialog() {
         val v = View.inflate(requireContext(), R.layout.success_modal_dialog, null)
+        v
 
         val builder = AlertDialog.Builder(requireContext())
         builder.setView(v)
