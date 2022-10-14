@@ -4,11 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/Documents/PROJECTS/squash/app/src/main/res/layout/activity_auth_screens.xml" value="0.1734375" />
+        <entry key="..\:/Users/User/Documents/PROJECTS/squash/app/src/main/res/layout/failed_modal_dialog.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/User/Documents/PROJECTS/squash/app/src/main/res/layout/fragment_home.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/User/Documents/PROJECTS/squash/app/src/main/res/layout/fragment_login_page_fragment.xml" value="0.1734375" />
+        <entry key="..\:/Users/User/Documents/PROJECTS/squash/app/src/main/res/layout/fragment_register_fragment.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/User/Documents/PROJECTS/squash/app/src/main/res/layout/success_modal_dialog.xml" value="0.35052083333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="16" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
 </project>

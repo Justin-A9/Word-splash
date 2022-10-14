@@ -21,4 +21,6 @@ class PreferenceManager {
         return sharedPreferences!!.getString(key, null).toString()
     }
 
+
+
 }
