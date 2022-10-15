@@ -19,8 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentHomeBinding
     private var db: FirebaseFirestore? = null
     private var userId: String? = null
 
@@ -29,7 +28,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -44,9 +43,10 @@ class HomeFragment : Fragment() {
             val user = documentSnapshot.toObject(Users::class.java)
 
             binding.welcome.text = getString(R.string.welcome, user?.username)
-
+        }
             val recycler = binding.recycler
             recycler.layoutManager = GridLayoutManager(requireContext(), 2)
+
 
 
             val occupations = ArrayList<Occupations>()
@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
             }
             recycler.adapter = adapter
 
-        }
+
 
         return binding.root
     }
