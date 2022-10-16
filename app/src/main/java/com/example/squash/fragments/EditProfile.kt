@@ -11,28 +11,49 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.navArgs
 import com.example.squash.R
 import com.example.squash.datasource.PreferenceManager
 import com.example.squash.databinding.FragmentEditProfileBinding
 import com.example.squash.datasource.Constants
+import com.example.squash.datasource.FireStoreData
+import com.example.squash.datasource.Users
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.fragment_edit_profile.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class EditProfile : Fragment() {
 
     private lateinit var navController: NavController
-    private  var imageUri: Uri? = null
+    private var imageUri: Uri? = null
     private lateinit var auth: FirebaseAuth
-    val sharedPreferences = activity?.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-
+    private lateinit var fireStoreData: FirebaseFirestore
     val requestCode = 0
     private lateinit var binding: FragmentEditProfileBinding
     var preferenceManager: PreferenceManager? = null
+    private var imageRef = Firebase.storage.reference
+    private val args by navArgs<EditProfileArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,23 +64,24 @@ class EditProfile : Fragment() {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         preferenceManager?.preferenceManager(requireContext())
         auth = FirebaseAuth.getInstance()
+        fireStoreData = FirebaseFirestore.getInstance()
+
 
         navController = NavHostFragment.findNavController(this)
 
-        val username = sharedPreferences?.getString(Constants.USERNAME, null)
-        val city = sharedPreferences?.getString("city", null)
-        val tellUs = sharedPreferences?.getString("tellUs", null)
 
-        binding.city.setText(city)
-        binding.tellUs.setText(tellUs)
-        binding.username.setText(username)
+        binding.username.setText(args.user.username)
+        binding.tellUs.setText(args.user.about)
+        binding.city.setText(args.user.city)
 
-        val bundle = Bundle()
-        val my =  binding.username.text.toString()
-        bundle.putString("myName",my)
+        val user = auth.currentUser?.email
+        if (user != null) {
+            downloadImage(user)
+        }
 
 
-        if (auth.currentUser != null){
+
+        if (auth.currentUser != null) {
             binding.editProfEmail.setText(auth.currentUser!!.email)
         }
 
@@ -79,32 +101,13 @@ class EditProfile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
+        val user = auth.currentUser?.email
         binding.saveChanges.setOnClickListener {
-
-            val editor = sharedPreferences?.edit()
-            editor?.apply {
-                putString(Constants.USERNAME, binding.username.text.toString())
-                putString("email", binding.editProfEmail.text.toString())
-                putString("tellUs", binding.tellUs.text.toString())
-                putString("tellUs", binding.city.text.toString())
-                editor.apply()
+            updateUserProfileDetails()
+            if (user != null) {
+                uploadToFireBaseStorage(user)
             }
-
-            val bundle = Bundle()
-            val email = binding.editProfEmail.text.toString()
-
-
-            bundle.putString("email", email)
-            bundle.putString("image", binding.imageProfile.toString())
-
-            val username = binding.username.text.toString()
-            bundle.putString("username", username)
-
-            bundle.putString("profileImage", imageUri.toString())
-
-            val tellUs = binding.tellUs.text.toString()
-            bundle.putString("tellUs", tellUs)
-            navController.navigate(R.id.action_edit_Profile_to_profile, bundle)
+            checkDetails()
         }
     }
 
@@ -116,10 +119,109 @@ class EditProfile : Fragment() {
             val imageProfile = view?.findViewById<CircleImageView>(R.id.imageProfile)
 
             imageUri = data.data
-            //preferenceManager?.putString("imagesent", imageUri.toString())
             val bitmap = imageUri?.let { uriToBitMap(it) }
             imageProfile?.setImageBitmap(bitmap)
         }
+    }
+
+    private fun uploadToFireBaseStorage(filename: String)  {
+        try {
+            imageUri?.let {
+                imageRef.child("images/$filename").putFile(it)
+            }
+
+        } catch (e: Exception) {
+
+
+        }
+
+    }
+
+        private fun downloadImage(filename: String)= CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val maxDownloadSize = 5L * 1024 * 1024
+            val bytes = imageRef.child("images/$filename").getBytes(maxDownloadSize).await()
+            val bmp = BitmapFactory.decodeByteArray(bytes, 0,bytes.size)
+            withContext(Dispatchers.Main){
+                binding.imageProfile.setImageBitmap(bmp)
+            }
+
+        } catch (e: Exception) {
+
+        }
+    }
+
+     fun updateUserProfileDetails(){
+
+        val userHashMap = HashMap<String, Any>()
+        val email = binding.editProfEmail.text.toString().trim { it <= ' ' }
+        if (email != args.user.email){
+            userHashMap["email"] = email
+        }
+        val username = binding.username.text.toString().trim { it <= ' ' }
+        if (username != args.user.username){
+            userHashMap["username"] = username
+        }
+
+        val aboutUs = binding.tellUs.text.toString().trim { it <= ' ' }
+        if (aboutUs != args.user.about){
+            userHashMap["about"] = aboutUs
+        }
+
+        val city = binding.city.text.toString().trim { it <= ' ' }
+        if (city != args.user.city){
+            userHashMap["city"] = city
+        }
+
+
+        FireStoreData().updateUserInfoInFireStore(this, userHashMap, requireContext())
+
+    }
+
+    private fun checkDetails(){
+        if (binding.username.text.toString().isEmpty()){
+            showErrorSnackBar("Username must not be left empty", true)
+        }else if(binding.city.text.toString().isEmpty()){
+            showErrorSnackBar("City cannot be left empty", true)
+            binding.layout3.error = "Please input this field"
+        }else if (binding.tellUs.text.toString().isEmpty()){
+            showErrorSnackBar("Details should not be left empty", true)
+        }else{
+            navController.navigate(R.id.action_edit_Profile_to_profile)
+        }
+    }
+
+    fun showErrorSnackBar(message: String, errorMessage: Boolean) {
+        val snackBar = Snackbar.make(
+            requireActivity().findViewById(android.R.id.content),
+            message,
+            Snackbar.LENGTH_LONG
+        )
+        val snackbarView = snackBar.view
+
+        if (errorMessage) {
+            snackbarView.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.snackBarFailure
+                )
+            )
+        } else {
+            snackbarView.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.main_primary_color
+                )
+            )
+        }
+        snackBar.show()
+    }
+
+
+
+
+    fun userInfoUpdateSuccess(){
+        Toast.makeText(requireContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show()
     }
 
     private fun uriToBitMap(selectedFileUri: Uri): Bitmap? {
@@ -136,10 +238,5 @@ class EditProfile : Fragment() {
         return null
     }
 
-
-    private fun fireStore(){
-
-    }
-
-
 }
+

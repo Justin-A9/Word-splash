@@ -179,6 +179,8 @@ class RegisterFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setView(v)
         val dialog = builder.create()
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
         dialog.show()
         val button = v.findViewById<Button>(R.id.btn_continue)
         button.setOnClickListener {

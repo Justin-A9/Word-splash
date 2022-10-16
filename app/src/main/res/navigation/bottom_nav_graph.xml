@@ -40,6 +40,9 @@
         android:name="com.example.squash.fragments.EditProfile"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="user"
+            app:argType="com.example.squash.datasource.Users" />
         <action
             android:id="@+id/action_edit_Profile_to_profile"
             app:destination="@id/profile" />
@@ -47,7 +50,8 @@
     <fragment
         android:id="@+id/profile"
         android:name="com.example.squash.fragments.Profile"
-        android:label="Profile" >
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_to_edit_Profile"
             app:destination="@id/edit_Profile" />
