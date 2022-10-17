@@ -31,7 +31,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.fragment_edit_profile.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -89,7 +88,7 @@ class EditProfile : Fragment() {
             navController.navigate(R.id.action_edit_Profile_to_profile)
         }
 
-        binding.imageProfile.setOnClickListener {
+        binding.textAddImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             startActivityForResult(intent, requestCode)
