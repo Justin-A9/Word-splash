@@ -32,12 +32,9 @@ class LoginPageFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginPageFragmentBinding
     private lateinit var auth: FirebaseAuth
-    private val RC_SIGN_IN = 1
-    private val TAG =  "GOOGLE-AUTH"
+    private val TAG = "GOOGLE-AUTH"
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var navController: NavController
-    private val REQ_ONE_TAP = 2  // Can be any integer unique to the Activity
-    private var showOneTapUI = true
     private lateinit var gso: GoogleSignInOptions
 
 
@@ -55,19 +52,18 @@ class LoginPageFragment : Fragment() {
 
         auth = Firebase.auth
 
-        binding.googleLogo.setOnClickListener {
+//        val currentUser = auth.currentUser
+//        currentUser!!.displayName
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(Constants.GoogleSignIn)
+            .requestEmail()
+            .build()
 
-             gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(Constants.GoogleSignIn)
-                .requestEmail()
-                .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-            mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-//            val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-//            googleSignInClient.signInIntent.also {
-//                startActivityForResult(it, RC_SIGN_IN)
-//            }
+        binding.linear2.setOnClickListener {
+            googleSignIn()
 
         }
 
@@ -75,12 +71,6 @@ class LoginPageFragment : Fragment() {
 
             Navigation.findNavController(view)
                 .navigate(R.id.action_login_page_fragment_to_forgot_password_fragment3)
-        }
-
-        binding.signInWithGoogle.setOnClickListener {
-
-          googleSignIn()
-
         }
 
         binding.loginBtn.setOnClickListener {
@@ -102,16 +92,26 @@ class LoginPageFragment : Fragment() {
 
     }
 
-    private fun googleSignIn(){
+    private fun googleSignIn() {
         val signInIntent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        startActivityForResult(signInIntent, Constants.RC_SIGN_IN)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
+        if (requestCode == Constants.RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            if (task.isSuccessful) {
+                try {
+                    val account = task.getResult(ApiException::class.java)
+                    googleAuthForFirebase(account.idToken!!)
+                } catch (e: ApiException) {
 
-
-
-
+                }
+            }
+        }
+    }
 
     private fun loginUser() {
         val email = binding.email.text.toString()
@@ -170,39 +170,31 @@ class LoginPageFragment : Fragment() {
             .show()
     }
 
-//    private fun checkLoggedInState(){
-//        if (auth.currentUser != null){
-//            startActivity(Intent(requireContext(), HomeScreen::class.java))
-//        }else{
-//            Toast("PLease Log in")
-//        }
-//    }
 
+    private fun googleAuthForFirebase(idToken: String) {
+        val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(firebaseCredential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    val user = auth.currentUser
+                    showErrorSnackBar("Login Successful", false)
+                    if (user != null) {
 
-//    private fun googleAuthForFirebase(account: GoogleSignInAccount) {
-//        val firebaseCredential = GoogleAuthProvider.getCredential(account.idToken, null)
-//        auth.signInWithCredential(firebaseCredential)
-//            .addOnCompleteListener(requireActivity()) { task ->
-//                if (task.isSuccessful) {
-//                    // Sign in success, update UI with the signed-in user's information
-//                    val user = auth.currentUser
-//                    showErrorSnackBar("Login Successful", false)
-//                    if (user != null) {
-//
-//                        val intent = Intent(requireContext(), LandingPage::class.java)
-//                        activity?.startActivity(intent)
-//                    }
-//                } else {
-//                    showErrorSnackBar("Login Unsuccessful", true)
-//
-//                    android.widget.Toast.makeText(
-//                        requireContext(),
-//                        "Operation failed",
-//                        android.widget.Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//
-//            }
-//    }
+                        val intent = Intent(requireContext(), LandingPage::class.java)
+                        activity?.startActivity(intent)
+                    }
+                } else {
+                    showErrorSnackBar("Login Unsuccessful", true)
+
+                    android.widget.Toast.makeText(
+                        requireContext(),
+                        "Operation failed",
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            }
+    }
 
 }

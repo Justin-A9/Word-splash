@@ -68,5 +68,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation("androidx.room:room-runtime:2.4.3")
+    implementation platform('com.google.firebase:firebase-bom:31.0.0')
+
+    // Add the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage-ktx'
     annotationProcessor("androidx.room:room-compiler:2.4.3")
 }
