@@ -144,28 +144,29 @@
             android:id="@+id/Dont_Have_An_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
+            android:layout_marginStart="10dp"
             android:text="Don't Have An Account?"
             android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/image"
             app:layout_constraintTop_toBottomOf="@id/linear2" />
+
 
         <TextView
             android:id="@+id/sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:text="Sign Up"
             android:textColor="#428DFC"
             android:textSize="17sp"
             android:textStyle="bold"
+            android:layout_marginStart="10dp"
             app:layout_constraintLeft_toRightOf="@id/Dont_Have_An_account"
+            app:layout_constraintStart_toEndOf="@+id/Dont_Have_An_account"
             app:layout_constraintTop_toBottomOf="@id/linear2" />
-
 
         <View
             android:id="@+id/image"
@@ -193,6 +194,7 @@
             app:layout_constraintTop_toBottomOf="@id/login_btn" />
 
         <View
+            android:id="@+id/blocking"
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:background="@color/black"

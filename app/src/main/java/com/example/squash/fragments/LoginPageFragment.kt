@@ -118,8 +118,10 @@ class LoginPageFragment : Fragment() {
         val password = binding.password.text.toString()
         if (email.isEmpty()) {
             showErrorSnackBar("Email cannot be left blank", true)
+            binding.progressBar2.visibility = View.GONE
         } else if (password.isEmpty()) {
             showErrorSnackBar("Password cannot be left blank", true)
+            binding.progressBar2.visibility = View.GONE
         } else {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task ->
@@ -176,7 +178,6 @@ class LoginPageFragment : Fragment() {
         auth.signInWithCredential(firebaseCredential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                     showErrorSnackBar("Login Successful", false)
                     if (user != null) {

@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/start" />
+                    android:src="@drawable/wordsplashlogo" />
 
             </androidx.cardview.widget.CardView>
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Play game by category"
-                android:textColor="#B3000000"
+                android:textColor="@color/fade_black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/imageView"
