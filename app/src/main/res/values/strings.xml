@@ -15,6 +15,9 @@
     <string name="search">Search</string>
     <string name="less_than_150_words">less thanwords</string>
     <string name="welcome">Welcome, %s</string>
+    <string name="amaka">Your Username: %s</string>
+    <string name="about">About me: %s</string>
+    <string name="justin_gmail_com">Your Email:%s</string>
     <string-array name="category">
         <item>Medicine</item>
         <item>Sport</item>

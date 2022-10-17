@@ -1,5 +1,9 @@
 package com.example.squash.datasource
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Users (
     val email: String="",
     val password: String="",
@@ -8,4 +12,4 @@ data class Users (
     val city: String ="",
     val about: String="",
 
-)
+): Parcelable

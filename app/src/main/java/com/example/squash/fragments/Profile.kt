@@ -70,31 +70,21 @@ class Profile : Fragment() {
             binding.backBtn.setOnClickListener {
                 navController.navigate(R.id.action_profile_to_menuFragment)
             }
-//            binding.editProfileBTN.setOnClickListener {
-//                val action = ProfileDirections.actionProfileToEditProfile(user!!)
-//                navController.navigate(action)
-//            }
-
-//            val args = this.arguments
-//            val currentImage = args?.getString("profileImage")
-//
-//            if (currentImage != null) {
-//                val fileUri = Uri.parse(currentImage)
-//                binding.imageProfile.setImageURI(fileUri)
-//            }
-
-
+            binding.editProfileBTN.setOnClickListener {
+                val action = ProfileDirections.actionProfileToEditProfile(user!!)
+                navController.navigate(action)
+            }
         }
         return binding.root
     }
 
 
-    private fun downloadImage(filename: String)= CoroutineScope(Dispatchers.IO).launch {
+    private fun downloadImage(filename: String) = CoroutineScope(Dispatchers.IO).launch {
         try {
             val maxDownloadSize = 5L * 1024 * 1024
             val bytes = imageRef.child("images/$filename").getBytes(maxDownloadSize).await()
-            val bmp = BitmapFactory.decodeByteArray(bytes, 0,bytes.size)
-            withContext(Dispatchers.Main){
+            val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            withContext(Dispatchers.Main) {
                 binding.imageProfile.setImageBitmap(bmp)
             }
 
