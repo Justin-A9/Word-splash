@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.squash.R
 import com.example.squash.activities.SubCategory
@@ -22,6 +24,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private var db: FirebaseFirestore? = null
     private var userId: String? = null
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +33,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        navController = NavHostFragment.findNavController(this)
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         db = FirebaseFirestore.getInstance()
@@ -53,15 +57,15 @@ class HomeFragment : Fragment() {
             occupations.add(Occupations("Medicine"))
             occupations.add(Occupations("Sport"))
             occupations.add(Occupations("Finance"))
-            occupations.add(Occupations("Food"))
-            occupations.add(Occupations("Education"))
             occupations.add(Occupations("Countries"))
+            occupations.add(Occupations("Random"))
             val adapter = Adapter(occupations)
 
+
             adapter.onItemClick = {
-                val intent = Intent(requireContext(), SubCategory::class.java)
-                intent.putExtra("name", it.name)
-                startActivity(intent)
+                val bundle = Bundle()
+                bundle.putString("name", it.name)
+                navController.navigate(R.id.action_homeFragment_to_game, bundle)
             }
             recycler.adapter = adapter
 

@@ -18,20 +18,23 @@
     <string name="amaka">Your Username: %s</string>
     <string name="about">About me: %s</string>
     <string name="justin_gmail_com">Your Email:%s</string>
+    <string name="wordcount">%d of %d words</string>
+    <string name="score">Score : %d</string>
+    <string name="hint">The first letter is: %s</string>
     <string-array name="category">
         <item>Medicine</item>
         <item>Sport</item>
         <item>Finance</item>
-        <item>Food</item>
-        <item>Education</item>
+        <item>Random</item>
         <item>Countries</item>
     </string-array>
 
     <string-array name="timer">
         <item>1 minute</item>
+        <item>2 minutes</item>
+        <item>3 minutes</item>
+        <item>4 minutes</item>
         <item>5 minutes</item>
-        <item>10 minutes</item>
-        <item> 30 minutes</item>
     </string-array>
 
     <string-array name="languages">
