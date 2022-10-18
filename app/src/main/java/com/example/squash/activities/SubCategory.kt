@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.squash.adapters.SubCategoryAdapter
+import com.example.squash.data.DataSource
 import com.example.squash.databinding.ActivitySubCategoryBinding
 import com.example.squash.datasource.SubCategories
+import com.example.squash.datasource.medicine
 import kotlin.collections.ArrayList
 
 class SubCategory : AppCompatActivity() {
@@ -21,19 +23,37 @@ class SubCategory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        subCategories = ArrayList()
-        subCategories.add(SubCategories("Nursing"))
-        subCategories.add(SubCategories("Nursing"))
-        subCategories.add(SubCategories("Medicine"))
-        subCategories.add(SubCategories("Shoe"))
-        subCategories.add(SubCategories("Nursing"))
-        subCategories.add(SubCategories("Nursing"))
-        adapter = SubCategoryAdapter(subCategories)
+        val intent = intent.extras
+        val getData = intent?.get("name")
+        binding.text.text = getData.toString()
 
 
-//        binding.toolbar.apply {
-//            setBackgroundColor(resources.getColor(R.color.white))
-//        }
+        val sport =  DataSource().loadSportOccupation()
+        val countries =  DataSource().loadCountriesOccupation()
+
+
+
+        when(getData){
+            "Medicine" -> {
+
+                val medicine =  DataSource().loadMedicineOccupation()
+                subCategories = medicine
+                adapter = SubCategoryAdapter(medicine)
+
+            }
+            "Sport" -> adapter = SubCategoryAdapter(sport)
+            "Countries" -> adapter = SubCategoryAdapter(countries)
+        }
+
+
+//        subCategories.add(SubCategories("Nursing"))
+//        subCategories.add(SubCategories("Nursing"))
+//        subCategories.add(SubCategories("Medicine"))
+//        subCategories.add(SubCategories("Shoe"))
+//        subCategories.add(SubCategories("Nursing"))
+//        subCategories.add(SubCategories("Nursing"))
+
+
 
         binding.backBtn.setOnClickListener {
             onBackPressed()
@@ -42,9 +62,7 @@ class SubCategory : AppCompatActivity() {
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
 
-        val intent = intent.extras
-        val getData = intent?.get("name")
-        binding.text.text = getData.toString()
+
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {

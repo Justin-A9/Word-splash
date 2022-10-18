@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.squash.R
 import com.example.squash.databinding.FragmentPlaySquashBinding
 
@@ -14,6 +17,8 @@ class PlaySquashFragment : Fragment() {
 
     private var _binding : FragmentPlaySquashBinding? = null
     private  val binding get() = _binding!!
+    private lateinit var navController: NavController
+    private lateinit var category: String
 
     override fun onResume() {
         super.onResume()
@@ -27,8 +32,6 @@ class PlaySquashFragment : Fragment() {
         val timerAdapter = ArrayAdapter(requireContext(), R.layout.drop_down, timer)
         binding.autoCompleteTextView2.setAdapter(timerAdapter)
 
-        val languages = resources.getStringArray(R.array.languages)
-        val languageAdapter = ArrayAdapter(requireContext(),R.layout.drop_down, languages)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,11 +39,36 @@ class PlaySquashFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
+
+
         _binding = FragmentPlaySquashBinding.inflate(inflater, container, false)
+        navController = NavHostFragment.findNavController(this)
 
 
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.play.setOnClickListener {
+            val cat = binding.autoCompleteTextView.text.toString()
+            val time = binding.autoCompleteTextView2.text.toString()
+            if (cat == "Choose your category"){
+                Toast.makeText(requireContext(), "Category cannot be left blank", Toast.LENGTH_SHORT).show()
+            }else if (time == "Set timer") {
+                binding.layout2.isErrorEnabled = true
+                binding.layout2.error = "Timer cannot be left empty"
+            }else{
+                val bundle = Bundle()
+                bundle.putString("cat", cat)
+                bundle.putString("time", time)
+                Toast.makeText(requireContext(), cat, Toast.LENGTH_SHORT).show()
+                navController.navigate(R.id.action_playSquashFragment_to_game, bundle)
+            }
+
+        }
     }
 
 

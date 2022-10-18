@@ -7,8 +7,9 @@
         />
     <item android:title=""
         android:id="@+id/playSquashFragment"
-        android:icon="@drawable/ic_ellipse_1"/>
+        android:icon="@drawable/ellipse_1"
+       />
     <item android:title=""
         android:id="@+id/menuFragment"
-        android:icon="@drawable/ic___horizontal_dots_icon" />
+        android:icon="@drawable/ic_baseline_menu_24" />
 </menu>
