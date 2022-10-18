@@ -55,18 +55,14 @@ class Game : Fragment() {
             viewModel.getNextWord(medicine)
         } else if (getData == "Sport") {
             viewModel.getNextWord(sports)
-        }
+        }else if (getData == "Finance") {
+            viewModel.getNextWord(finance)
 
-//        timer = object : CountDownTimer(0, 0) {
-//            override fun onTick(p0: Long) {
-//                binding.timer.text = p0.toString()
-//            }
-//
-//            override fun onFinish() {
-//                Toast.makeText(requireContext(), "Done", Toast.LENGTH_SHORT).show()
-//            }
-//
-//        }
+        }else if (getData == "Random") {
+            viewModel.getNextWord(allWordsList)
+        }else if (getData == "Countries") {
+            viewModel.getNextWord(countries)
+        }
 
         when (getTimer) {
             "1 minute" -> aMinuteTimer()
