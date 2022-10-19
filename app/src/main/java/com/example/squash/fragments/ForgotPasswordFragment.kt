@@ -14,15 +14,14 @@ import com.google.firebase.ktx.Firebase
 
 class ForgotPasswordFragment : Fragment() {
 
-    private var _binding : FragmentForgotPasswordFragmentBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding : FragmentForgotPasswordFragmentBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentForgotPasswordFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentForgotPasswordFragmentBinding.inflate(inflater, container, false)
 
         val view = binding.root
 
@@ -30,13 +29,13 @@ class ForgotPasswordFragment : Fragment() {
 
         binding.submit.setOnClickListener {
 
-            val forgot_password_email = binding.forgotPasswordEmail.text.toString().trim { it <= ' '}
+            val forgotPasswordEmail = binding.forgotPasswordEmail.text.toString().trim { it <= ' '}
 
-            if (forgot_password_email.isEmpty()){
+            if (forgotPasswordEmail.isEmpty()){
                 Toast.makeText(requireContext(), "Email cannot be left blank", Toast.LENGTH_SHORT).show()
             }else{
 
-                FirebaseAuth.getInstance().sendPasswordResetEmail(forgot_password_email)
+                auth.sendPasswordResetEmail(forgotPasswordEmail)
                     .addOnCompleteListener{task ->
                         if (task.isSuccessful){
                             Toast.makeText(requireContext(), "Email sent", Toast.LENGTH_SHORT).show()
