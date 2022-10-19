@@ -1,13 +1,15 @@
 package com.example.squash.game
 
 import android.app.AlertDialog
+import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
@@ -18,6 +20,8 @@ import com.example.squash.databinding.FragmentGameBinding
 import com.example.squash.datasource.*
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import nl.dionsegijn.konfetti.models.Shape
+import nl.dionsegijn.konfetti.models.Size
 
 class Game : Fragment() {
 
@@ -26,6 +30,8 @@ class Game : Fragment() {
     private lateinit var navController: NavController
     private lateinit var getData: String
     private lateinit var timer: CountDownTimer
+    private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var myMedia: MediaPlayer
 
     override fun onStart() {
         super.onStart()
@@ -47,6 +53,18 @@ class Game : Fragment() {
 
         getArgument()
 
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.good)
+        myMedia = MediaPlayer.create(requireContext(), R.raw.fail)
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+            mediaPlayer.seekTo(0)
+        }
+
+        if (myMedia.isPlaying) {
+            myMedia.pause()
+            myMedia.seekTo(0)
+        }
+
         val args = this.arguments
         getData = args?.getString("cat").toString()
         val getTimer = args?.getString("time").toString()
@@ -55,12 +73,12 @@ class Game : Fragment() {
             viewModel.getNextWord(medicine)
         } else if (getData == "Sport") {
             viewModel.getNextWord(sports)
-        }else if (getData == "Finance") {
+        } else if (getData == "Finance") {
             viewModel.getNextWord(finance)
 
-        }else if (getData == "Random") {
+        } else if (getData == "Random") {
             viewModel.getNextWord(allWordsList)
-        }else if (getData == "Countries") {
+        } else if (getData == "Countries") {
             viewModel.getNextWord(countries)
         }
 
@@ -70,11 +88,11 @@ class Game : Fragment() {
             "3 minutes" -> threeMinutesTimer()
             "4 minutes" -> fourMinuteTimer()
             "5 minutes" -> fiveMinuteTimer()
-            "Set timer" ->{
+            "Set timer" -> {
 
             }
 
-            else ->{
+            else -> {
                 twoMinutesTimer()
             }
         }
@@ -82,6 +100,78 @@ class Game : Fragment() {
 
 
         return binding.root
+    }
+
+
+    private fun fail() {
+        val v = View.inflate(requireContext(), R.layout.finished_game_modal, null)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(v)
+        val dialog = builder.create()
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+        val playAgain = v.findViewById<MaterialButton>(R.id.play_again)
+        val score = v.findViewById<TextView>(R.id.You)
+        val yourScore = v.findViewById<TextView>(R.id.your_score)
+        val image = v.findViewById<ImageView>(R.id.image)
+        val sad = v.findViewById<ImageView>(R.id.sad)
+        var congrats = v.findViewById<TextView>(R.id.congrats)
+        val time = v.findViewById<TextView>(R.id.time)
+        val good = v.findViewById<ImageView>(R.id.good)
+        val tv_good = v.findViewById<TextView>(R.id.tv_good)
+        val tv_good_score = v.findViewById<TextView>(R.id.tv_good_score)
+        val wow = v.findViewById<ImageView>(R.id.wow)
+        val wow_congrats = v.findViewById<TextView>(R.id.wow_congrat)
+        val wow_score = v.findViewById<TextView>(R.id.wow_score)
+        val hat = v.findViewById<ImageView>(R.id.hat)
+
+        if (viewModel.score.value!! < 35) {
+            image.visibility = View.GONE
+            sad.visibility = View.VISIBLE
+            congrats.visibility = View.GONE
+            time.visibility = View.VISIBLE
+            score.visibility = View.GONE
+            yourScore.visibility = View.VISIBLE
+            yourScore.text = "Your final score ${viewModel.score.value}"
+        } else if (viewModel.score.value!! in 36..75) {
+            image.visibility = View.GONE
+            good.visibility = View.VISIBLE
+            tv_good.visibility = View.VISIBLE
+            congrats.visibility = View.GONE
+            score.visibility = View.GONE
+            tv_good_score.visibility = View.VISIBLE
+            tv_good_score.text = "Your final score ${viewModel.score.value}"
+        }else{
+            image.visibility = View.GONE
+            wow.visibility = View.VISIBLE
+            wow_congrats.visibility = View.VISIBLE
+            congrats.visibility = View.GONE
+            hat.visibility = View.VISIBLE
+            score.visibility = View.GONE
+            wow_score.visibility = View.VISIBLE
+            wow_score.text = "Your final score ${viewModel.score.value}"
+        }
+
+        // image.setImageResource(R.drawable.sad)
+        val exit = v.findViewById<AppCompatButton>(R.id.exitGame)
+
+
+        playAgain.setOnClickListener {
+            view?.let { it1 ->
+                restartGame()
+            }
+            dialog.dismiss()
+        }
+
+        exit.setOnClickListener {
+            view?.let { it1 ->
+                exitGame()
+                dialog.dismiss()
+            }
+
+        }
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
 
     private fun aMinuteTimer() {
@@ -92,11 +182,12 @@ class Game : Fragment() {
             }
 
             override fun onFinish() {
-                finishedDialog()
+                fail()
             }
 
         }
     }
+
 
     private fun twoMinutesTimer() {
         timer = object : CountDownTimer(120000, 1000) {
@@ -106,7 +197,7 @@ class Game : Fragment() {
             }
 
             override fun onFinish() {
-                finishedDialog()
+                fail()
             }
 
         }
@@ -120,7 +211,7 @@ class Game : Fragment() {
             }
 
             override fun onFinish() {
-                finishedDialog()
+                fail()
             }
 
         }
@@ -134,7 +225,7 @@ class Game : Fragment() {
             }
 
             override fun onFinish() {
-                finishedDialog()
+                fail()
             }
 
         }
@@ -148,7 +239,7 @@ class Game : Fragment() {
             }
 
             override fun onFinish() {
-                finishedDialog()
+                fail()
             }
 
         }
@@ -172,26 +263,52 @@ class Game : Fragment() {
         }
 
         binding.hint.setOnClickListener {
-          helpDialog()
+            helpDialog()
         }
         viewModel.currentScrambledWord.observe(viewLifecycleOwner) { newWord ->
             binding.word.text = newWord
         }
 
         binding.submit.setOnClickListener {
-            binding.textMeaning.visibility = View.GONE
+
             submitWord()
         }
 
         binding.skip.setOnClickListener {
-            binding.textMeaning.visibility = View.GONE
+            binding.userWord.text?.clear()
             skip()
         }
+
+
     }
 
+    override fun onDestroy() {
+        if (!this::mediaPlayer.isInitialized) {
+            mediaPlayer.stop()
+            mediaPlayer.release()
+        }
+
+        if (!this::myMedia.isInitialized) {
+            myMedia.stop()
+            myMedia.release()
+        }
+        super.onDestroy()
+    }
 
     private fun submitWord() {
-        if (viewModel.isWordCorrect(binding.userWord.text.toString())) {
+        if (viewModel.isWordCorrect(binding.userWord.text.toString().trim { it <= ' ' })) {
+            mediaPlayer.start()
+            val konfetti = binding.konfetti
+            konfetti.build()
+                .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                .setDirection(0.0, 359.0)
+                .setSpeed(5f, 5f)
+                .setFadeOutEnabled(true)
+                .setTimeToLive(1)
+                .addShapes(Shape.Square, Shape.Circle)
+                .addSizes(Size(12))
+                .setPosition(-50f, konfetti.width + 50f, -50f, -50f)
+                .streamFor(300, 1000L)
             setErrorTextField(false)
             binding.userWord.text?.clear()
             if (viewModel.nextWord()) {
@@ -200,14 +317,15 @@ class Game : Fragment() {
                 finishedDialog()
             }
         } else {
+            myMedia.start()
             setErrorTextField(true)
         }
     }
 
-    private fun getArgument(){
+    private fun getArgument() {
         val args = this.arguments
         val getData = args?.get("name")
-        when(getData){
+        when (getData) {
             "Medicine" -> {
                 viewModel.getNextWord(medicine)
 
@@ -241,8 +359,7 @@ class Game : Fragment() {
     }
 
 
-
-    private fun helpDialog(){
+    private fun helpDialog() {
         val v = View.inflate(requireContext(), R.layout.help_modal, null)
 
         val builder = AlertDialog.Builder(requireContext())
@@ -253,14 +370,15 @@ class Game : Fragment() {
         dialog.show()
         val close = v.findViewById<AppCompatButton>(R.id.close)
         val text = v.findViewById<TextView>(R.id.text1)
-        text.text =  getString(R.string.hint, viewModel.hint().toCharArray()[0].toString().toUpperCase())
+        text.text =
+            getString(R.string.hint, viewModel.hint().toCharArray()[0].toString().toUpperCase())
 
         close.setOnClickListener {
             dialog.dismiss()
         }
     }
 
-    private fun finishedDialog(){
+    private fun finishedDialog() {
         val v = View.inflate(requireContext(), R.layout.finished_game_modal, null)
 
         val builder = AlertDialog.Builder(requireContext())
@@ -284,8 +402,9 @@ class Game : Fragment() {
         exit.setOnClickListener {
             view?.let { it1 ->
                 exitGame()
+                dialog.dismiss()
             }
-            dialog.dismiss()
+
         }
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
@@ -303,6 +422,7 @@ class Game : Fragment() {
             finishedDialog()
         }
     }
+
 
     private fun exitGame() {
         navController.navigate(R.id.action_game_to_homeFragment)
