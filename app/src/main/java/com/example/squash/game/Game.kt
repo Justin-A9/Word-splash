@@ -126,7 +126,7 @@ class Game : Fragment() {
         val wow_score = v.findViewById<TextView>(R.id.wow_score)
         val hat = v.findViewById<ImageView>(R.id.hat)
 
-        if (viewModel.score.value!! < 35) {
+        if (viewModel.score.value!! <= 45) {
             image.visibility = View.GONE
             sad.visibility = View.VISIBLE
             congrats.visibility = View.GONE
@@ -134,7 +134,7 @@ class Game : Fragment() {
             score.visibility = View.GONE
             yourScore.visibility = View.VISIBLE
             yourScore.text = "Your final score ${viewModel.score.value}"
-        } else if (viewModel.score.value!! in 36..75) {
+        } else if (viewModel.score.value!! in 50..65) {
             image.visibility = View.GONE
             good.visibility = View.VISIBLE
             tv_good.visibility = View.VISIBLE
