@@ -1,10 +1,13 @@
 package com.example.squash.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,6 +15,7 @@ import com.example.squash.R
 import com.example.squash.activities.AuthScreenActivity
 import com.example.squash.databinding.FragmentMenuBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.logout_modal.*
 
 class MenuFragment : Fragment() {
 
@@ -54,9 +58,7 @@ class MenuFragment : Fragment() {
         }
 
         binding.linearLogin.setOnClickListener {
-            auth.signOut()
-            val intent = Intent(requireContext(), AuthScreenActivity::class.java)
-            activity?.startActivity(intent)
+            logOut()
         }
         binding.linearShare.setOnClickListener {
 
@@ -70,5 +72,27 @@ class MenuFragment : Fragment() {
 
     private fun navigateTo(id:Int){
         navController.navigate(id)
+    }
+
+    fun logOut(){
+        val v = View.inflate(requireContext(), R.layout.logout_modal, null)
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(v)
+        val dialog = builder.create()
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+        val cancel = v.findViewById<AppCompatButton>(R.id.cancel)
+        val logout = v.findViewById<TextView>(R.id.logOut)
+
+        logout.setOnClickListener{
+            auth.signOut()
+            val intent = Intent(requireContext(), AuthScreenActivity::class.java)
+            activity?.startActivity(intent)
+        }
+        cancel.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 }
