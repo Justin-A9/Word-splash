@@ -20,6 +20,9 @@ class GameViewModel : ViewModel() {
     private val _score = MutableLiveData(0)
     val score: LiveData<Int> get() = _score
 
+    private val _timer = MutableLiveData(0)
+    val timer: LiveData<Int> get() = _timer
+
     private val _currentWordCount = MutableLiveData(0)
     val currentWordCount get() = _currentWordCount
 

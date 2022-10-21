@@ -62,7 +62,7 @@ class MenuFragment : Fragment() {
 
             val intent= Intent()
             intent.action=Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"Hey Check out this Great app:")
+            intent.putExtra(Intent.EXTRA_TEXT,"Word Squash is a word puzzle application. Download now using this link https://bit.ly/3TJjSa3")
             intent.type="text/plain"
             startActivity(Intent.createChooser(intent,"Share To:"))
         }

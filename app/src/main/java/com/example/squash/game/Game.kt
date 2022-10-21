@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,9 @@ import com.example.squash.databinding.FragmentGameBinding
 import com.example.squash.datasource.*
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.firestore.util.Assert.fail
+import kotlinx.android.synthetic.main.finished_game_modal.*
+import kotlinx.android.synthetic.main.fragment_game.*
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 
@@ -29,18 +33,18 @@ class Game : Fragment() {
     private val viewModel: GameViewModel by viewModels()
     private lateinit var navController: NavController
     private lateinit var getData: String
-    private lateinit var timer: CountDownTimer
+    private lateinit var time: CustomTimer
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var myMedia: MediaPlayer
 
     override fun onStart() {
         super.onStart()
-        timer.start()
+        time.start()
     }
 
     override fun onStop() {
         super.onStop()
-        timer.cancel()
+        time.onFinish
     }
 
     override fun onCreateView(
@@ -175,73 +179,87 @@ class Game : Fragment() {
     }
 
     private fun aMinuteTimer() {
-        timer = object : CountDownTimer(60000, 1000) {
-            override fun onTick(p0: Long) {
-                val seconds = p0 / 1000
-                binding.timer.text = seconds.toString()
-            }
+        time = CustomTimer(60000, 1000)
+        var timeLeft = 0L
+        time.onTick = { millisUntilFinished ->
+            timeLeft = millisUntilFinished / 1000
+            binding.timer.text = timeLeft.toString()
 
-            override fun onFinish() {
-                fail()
+            if (timeLeft <= 10){
+                binding.timer.setTextColor(resources.getColor(R.color.snackBarFailure))
             }
-
+        }
+        time.onFinish = {
+            fail()
         }
     }
 
 
     private fun twoMinutesTimer() {
-        timer = object : CountDownTimer(120000, 1000) {
-            override fun onTick(p0: Long) {
-                val seconds = p0 / 1000
-                binding.timer.text = seconds.toString()
-            }
+        time = CustomTimer(120000, 1000)
 
-            override fun onFinish() {
-                fail()
-            }
+        var timeLeft = 0L
+        time.onTick = { millisUntilFinished ->
+            timeLeft = millisUntilFinished / 1000
+            binding.timer.text = timeLeft.toString()
 
+            if (timeLeft <= 10){
+                binding.timer.setTextColor(resources.getColor(R.color.snackBarFailure))
+            }
+        }
+        time.onFinish = {
+            fail()
         }
     }
 
+
     private fun threeMinutesTimer() {
-        timer = object : CountDownTimer(180000, 1000) {
-            override fun onTick(p0: Long) {
-                val seconds = p0 / 1000
-                binding.timer.text = seconds.toString()
-            }
+        time = CustomTimer(180000, 1000)
 
-            override fun onFinish() {
-                fail()
-            }
+        var timeLeft = 0L
+        time.onTick = { millisUntilFinished ->
+            timeLeft = millisUntilFinished / 1000
+            binding.timer.text = timeLeft.toString()
 
+            if (timeLeft <= 10){
+                binding.timer.setTextColor(resources.getColor(R.color.snackBarFailure))
+            }
+        }
+        time.onFinish = {
+            fail()
         }
     }
 
     private fun fourMinuteTimer() {
-        timer = object : CountDownTimer(240000, 1000) {
-            override fun onTick(p0: Long) {
-                val seconds = p0 / 1000
-                binding.timer.text = seconds.toString()
-            }
+        time = CustomTimer(240000, 1000)
 
-            override fun onFinish() {
-                fail()
-            }
+        var timeLeft = 0L
+        time.onTick = { millisUntilFinished ->
+            timeLeft = millisUntilFinished / 1000
+            binding.timer.text = timeLeft.toString()
 
+            if (timeLeft <= 10){
+                binding.timer.setTextColor(resources.getColor(R.color.snackBarFailure))
+            }
+        }
+        time.onFinish = {
+            fail()
         }
     }
 
     private fun fiveMinuteTimer() {
-        timer = object : CountDownTimer(300000, 1000) {
-            override fun onTick(p0: Long) {
-                val seconds = p0 / 1000
-                binding.timer.text = seconds.toString()
-            }
+        time = CustomTimer(300000, 1000)
+        var timeLeft = 0L
+        time.onTick = { millisUntilFinished ->
+            timeLeft = millisUntilFinished / 1000
+            binding.timer.text = timeLeft.toString()
 
-            override fun onFinish() {
-                fail()
+            if (timeLeft <= 10){
+                binding.timer.setTextColor(resources.getColor(R.color.snackBarFailure))
             }
-
+        }
+        time.onFinish = {
+            fail()
         }
     }
 
@@ -253,11 +271,13 @@ class Game : Fragment() {
         }
 
         viewModel.score.observe(viewLifecycleOwner) { newScore ->
-            binding.score.text = getString(R.string.score, newScore)
+            binding.score.text = newScore.toString()
         }
 
         binding.quit.setOnClickListener {
+            time.pause()
             showDialog()
+
         }
 
         binding.hint.setOnClickListener {
@@ -350,10 +370,14 @@ class Game : Fragment() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Are you sure?")
             .setMessage("Your Current Score ${viewModel.score.value}")
-            .setCancelable(true)
+            .setCancelable(false)
             .setNegativeButton("Exit") { _, _ -> exitGame() }
-            .setPositiveButton("Restart Game") { _, _ -> restartGame() }
+            .setPositiveButton("Resume") { dialog, _ ->
+                time.resume()
+                dialog.dismiss()
+            }
             .show()
+
     }
 
 
@@ -376,41 +400,10 @@ class Game : Fragment() {
         }
     }
 
-    private fun finishedDialog() {
-        val v = View.inflate(requireContext(), R.layout.finished_game_modal, null)
-
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setView(v)
-        val dialog = builder.create()
-        dialog.setCancelable(false)
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.show()
-        val playAgain = v.findViewById<MaterialButton>(R.id.play_again)
-        val score = v.findViewById<TextView>(R.id.You)
-        val exit = v.findViewById<AppCompatButton>(R.id.exitGame)
-
-        score.text = "You scored ${viewModel.score.value}"
-        playAgain.setOnClickListener {
-            view?.let { it1 ->
-                restartGame()
-            }
-            dialog.dismiss()
-        }
-
-        exit.setOnClickListener {
-            view?.let { it1 ->
-                exitGame()
-                dialog.dismiss()
-            }
-
-        }
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-    }
-
     private fun restartGame() {
+        time.restart()
         viewModel.reinitializeData()
         setErrorTextField(false)
-        timer.start()
     }
 
     private fun skip() {
