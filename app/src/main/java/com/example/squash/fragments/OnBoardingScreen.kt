@@ -13,6 +13,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.squash.activities.LandingPage
 import com.example.squash.R
+import com.example.squash.activities.AuthScreenActivity
 import com.example.squash.datasource.Constants
 import com.example.squash.databinding.FragmentOnBoardingScreenBinding
 
@@ -48,9 +49,7 @@ class OnBoardingScreen : Fragment(), ViewPager.OnPageChangeListener {
         }
 
         binding.skip.setOnClickListener {
-            val intent = Intent(requireContext(), LandingPage::class.java)
-            //startActivity(intent)
-            activity?.startActivity(intent)
+            startActivity(Intent(requireContext(), AuthScreenActivity::class.java))
             onBoardFinished()
         }
         return view
