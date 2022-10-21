@@ -116,7 +116,7 @@
             android:layout_below="@id/sad"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="Time Out!"
+            android:text="Game over!"
             android:visibility="gone"
             android:textColor="#FC4242"
             android:textStyle="bold" />
