@@ -142,7 +142,7 @@ class Game : Fragment() {
             score.visibility = View.GONE
             tv_good_score.visibility = View.VISIBLE
             tv_good_score.text = "Your final score ${viewModel.score.value}"
-        }else{
+        } else {
             image.visibility = View.GONE
             wow.visibility = View.VISIBLE
             wow_congrats.visibility = View.VISIBLE
@@ -248,7 +248,6 @@ class Game : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         viewModel.currentWordCount.observe(viewLifecycleOwner) { newWordCount ->
             binding.wordCount.text = getString(R.string.wordcount, newWordCount, MAX_NO_WORDS)
         }
@@ -258,7 +257,6 @@ class Game : Fragment() {
         }
 
         binding.quit.setOnClickListener {
-
             showDialog()
         }
 

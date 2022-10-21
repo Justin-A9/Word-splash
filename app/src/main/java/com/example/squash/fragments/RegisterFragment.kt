@@ -31,7 +31,6 @@ class RegisterFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var fStore: FirebaseFirestore
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,7 +64,6 @@ class RegisterFragment : Fragment() {
     private fun navigateTo(id: Int) {
         navController.navigate(id)
     }
-
 
     private fun registerUser() {
 

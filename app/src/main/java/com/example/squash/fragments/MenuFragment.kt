@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -44,9 +45,6 @@ class MenuFragment : Fragment() {
         binding.linearProfile.setOnClickListener {
             navigateTo(R.id.action_menuFragment_to_profile)
         }
-        binding.linearNotifications.setOnClickListener {
-            navigateTo(R.id.action_menuFragment_to_notifications)
-        }
         binding.linearPrivacyPolicy.setOnClickListener {
             navigateTo(R.id.action_menuFragment_to_privacy_policy)
         }
@@ -67,6 +65,10 @@ class MenuFragment : Fragment() {
             intent.putExtra(Intent.EXTRA_TEXT,"Hey Check out this Great app:")
             intent.type="text/plain"
             startActivity(Intent.createChooser(intent,"Share To:"))
+        }
+
+        binding.rateUs.setOnClickListener {
+            Toast.makeText(requireContext(), "Coming soon!!", Toast.LENGTH_SHORT).show()
         }
     }
 
