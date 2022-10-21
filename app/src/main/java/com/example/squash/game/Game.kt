@@ -167,8 +167,8 @@ class Game : Fragment() {
         exit.setOnClickListener {
             view?.let { it1 ->
                 exitGame()
-                dialog.dismiss()
             }
+            dialog.dismiss()
 
         }
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -314,7 +314,7 @@ class Game : Fragment() {
             if (viewModel.nextWord()) {
 
             } else {
-                finishedDialog()
+                fail()
             }
         } else {
             myMedia.start()
@@ -419,7 +419,7 @@ class Game : Fragment() {
         if (viewModel.nextWord()) {
             setErrorTextField(false)
         } else {
-            finishedDialog()
+            fail()
         }
     }
 
