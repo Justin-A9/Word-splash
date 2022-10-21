@@ -18,7 +18,7 @@
                 android:layout_width="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/back"
-                android:padding="20dp"
+                android:layout_margin="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_height="wrap_content" />
 
@@ -26,21 +26,21 @@
                 android:id="@+id/dropFeedbacktxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Drop a feedback"
                 android:fontFamily="@font/poppins"
+                android:text="Drop a feedback"
+                android:layout_marginStart="14dp"
+                android:textColor="@color/fade_black"
                 android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="80dp"
-                android:layout_marginStart="47dp"
                 android:textStyle="bold"
-                android:textColor="@color/fade_black" />
+                app:layout_constraintBottom_toBottomOf="@+id/back_btn"
+                app:layout_constraintStart_toEndOf="@+id/back_btn"
+                app:layout_constraintTop_toTopOf="@+id/back_btn" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout4"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="300dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="30dp"
@@ -74,13 +74,15 @@
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="submit"
-                android:textColor="@color/white"
                 android:layout_margin="40dp"
                 android:background="@drawable/hey"
-                app:layout_constraintTop_toBottomOf="@id/layout4"
-                android:layout_marginTop="40dp" />
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/layout4"
+                app:layout_constraintStart_toStartOf="@+id/layout4"
+                app:layout_constraintTop_toBottomOf="@id/layout4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
 </layout>

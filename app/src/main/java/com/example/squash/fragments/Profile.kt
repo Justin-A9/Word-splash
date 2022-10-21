@@ -1,7 +1,6 @@
 package com.example.squash.fragments
 
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +56,6 @@ class Profile : Fragment() {
             userId = currentUser.uid
         }
 
-
         val docRef = db?.collection("users")?.document(userId!!)
 
         docRef?.get()?.addOnSuccessListener { documentSnapshot ->
@@ -77,7 +75,6 @@ class Profile : Fragment() {
         }
         return binding.root
     }
-
 
     private fun downloadImage(filename: String) = CoroutineScope(Dispatchers.IO).launch {
         try {

@@ -34,7 +34,7 @@ class PrivacyPolicy : Fragment() {
         return binding.root
     }
 
-    fun showPrivacyPolicy() {
+    private fun showPrivacyPolicy() {
         binding.webView.settings.loadsImagesAutomatically = true
         binding.webView.settings.javaScriptEnabled = true
         binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY

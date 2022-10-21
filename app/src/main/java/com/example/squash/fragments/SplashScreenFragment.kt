@@ -24,8 +24,6 @@ class SplashScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-
         navController = NavHostFragment.findNavController(this)
 
         auth = FirebaseAuth.getInstance()
@@ -50,8 +48,8 @@ class SplashScreenFragment : Fragment() {
     }
 
     private fun checkOnBoardingState(): Boolean{
-        val sharedprf = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-        return sharedprf.getBoolean(Constants.Finished, false)
+        val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean(Constants.Finished, false)
 
     }
 

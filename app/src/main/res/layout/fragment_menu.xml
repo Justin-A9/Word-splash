@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,11 +22,12 @@
                 android:id="@+id/textViewMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/poppins"
                 android:text="Menu"
                 android:textColor="#B3000000"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -36,18 +35,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="28dp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewMenu">
 
                 <LinearLayout
                     android:id="@+id/linearProfile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="15dp"
                     android:orientation="horizontal"
-                    android:padding="20dp"
-                    >
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -60,12 +61,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/montserrat_alternates"
                         android:layout_gravity="center_vertical"
-                        android:text="Profile" />
-
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:text="Profile"
+                        android:textSize="16sp" />
 
 
                     <RelativeLayout
@@ -73,86 +73,43 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_alignParentEnd="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
-                            android:layout_centerVertical="true"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/next"
+                            android:layout_alignParentEnd="true"
                             android:layout_centerInParent="true"
-                            app:tint="#828282" />
-
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearNotifications"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal"
-                    android:padding="20dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:background="@drawable/image_background"
-                        app:tint="#428DFC"
-                        android:src="@drawable/notifications" />
-
-                    <TextView
-                        android:textSize="16sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/montserrat_alternates"
-                        android:text="Notifications" />
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
                             android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_width="40dp"
-                            android:layout_height="15dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/next"
                             app:tint="#828282" />
 
                     </RelativeLayout>
-
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linear_privacy_policy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
                         android:background="@drawable/image_background"
-                        app:tint="#428DFC"
-                        android:src="@drawable/lock" />
+                        android:padding="5dp"
+                        android:src="@drawable/lock"
+                        app:tint="#428DFC" />
 
                     <TextView
-                        android:textSize="16sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="Privacy Policy" />
+                        android:text="Privacy Policy"
+                        android:textSize="16sp" />
 
 
                     <RelativeLayout
@@ -160,10 +117,10 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:scaleType="centerCrop"
                             android:src="@drawable/next"
                             app:tint="#828282" />
@@ -177,26 +134,27 @@
                     android:id="@+id/linearShare"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="7dp"
                         android:background="@drawable/image_background"
-                        app:tint="#428DFC"
-                        android:src="@drawable/ic_baseline_share_24" />
+                        android:padding="7dp"
+                        android:src="@drawable/ic_baseline_share_24"
+                        app:tint="#428DFC" />
 
                     <TextView
-                        android:textSize="16sp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="20dp"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="Share" />
+                        android:text="Share"
+                        android:textSize="16sp" />
 
 
                     <RelativeLayout
@@ -204,10 +162,10 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:scaleType="centerCrop"
                             android:src="@drawable/next"
                             app:tint="#828282" />
@@ -218,11 +176,13 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/rateUs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="20dp"
-                    android:padding="20dp">
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -233,23 +193,23 @@
                         app:tint="#428DFC" />
 
                     <TextView
-                        android:textSize="16sp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="20dp"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="Rate us" />
+                        android:text="Rate us"
+                        android:textSize="16sp" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:scaleType="centerCrop"
                             android:src="@drawable/next"
                             app:tint="#828282" />
@@ -263,9 +223,10 @@
                     android:id="@+id/linearDropFeedback"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="20dp"
-                    android:padding="20dp">
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -276,23 +237,23 @@
                         app:tint="#428DFC" />
 
                     <TextView
-                        android:textSize="16sp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="20dp"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="Drop a feedback" />
+                        android:text="Drop a feedback"
+                        android:textSize="16sp" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:scaleType="centerCrop"
                             android:src="@drawable/next"
                             app:tint="#828282" />
@@ -301,12 +262,14 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/linearLogin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -317,13 +280,13 @@
                         app:tint="#428DFC" />
 
                     <TextView
-                        android:textSize="16sp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="20dp"
                         android:fontFamily="@font/montserrat_alternates"
-                        android:text="Log out" />
+                        android:text="Log out"
+                        android:textSize="16sp" />
 
 
                     <RelativeLayout
@@ -331,17 +294,15 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
                             android:layout_width="40dp"
                             android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:scaleType="centerCrop"
                             android:src="@drawable/next"
                             app:tint="#828282" />
 
                     </RelativeLayout>
-
-
 
                 </LinearLayout>
 
@@ -350,6 +311,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
-
 
 </ScrollView>
